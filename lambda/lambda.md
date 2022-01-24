@@ -69,9 +69,16 @@ Determine whether each of the following expressions can be reduced to a normal f
 
 1. 𝜆𝑥.𝑥𝑥𝑥 
 
-2. (𝜆𝑧.𝑧𝑧)(𝜆𝑦.𝑦𝑦) 
+    **Yes** Can be reduced. It is already in normal form.
 
-3. (𝜆𝑥.𝑥𝑥𝑥)𝑧
+
+2. (λz.zz)(λy.yy) 
+
+    **No** The expression diverge. It re-writes itself. 
+
+3. (λx.xxx)z
+
+    **Yes.** Can be reduced to zzz
 
 
 
