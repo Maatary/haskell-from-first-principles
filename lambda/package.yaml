@@ -7,8 +7,7 @@ maintainer:          "example@example.com"
 copyright:           "2022 Maatary Okouya"
 
 extra-source-files:
-- README.md
-- ChangeLog.md
+- '*.md'
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
