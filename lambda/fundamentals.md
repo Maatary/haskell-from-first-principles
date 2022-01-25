@@ -135,7 +135,7 @@ Example of divergent lambda term called **omega**
 
 `(λx.xx)(λx.xx)`
 
-Applying the first lambda to the arguement give us back the same expression.
+Applying the first lambda to the argument give us back the same expression.
 
  
 
