@@ -102,6 +102,11 @@ is a convienient shorthand for
 - When applying the first argument, we’re binding `x`, eliminating the outer lambda, and **get `λy.xy` with `x` being whatever the outer lambda was bound to**.
 
 
+- In functional Programing all functions take one argument and return one result.
+
+
+
+
 ## Evaluation is simplification
 
 - There are multiple normal forms in lambda calculus, here we will focus and mean **beta normal form**. 
@@ -137,7 +142,29 @@ Example of divergent lambda term called **omega**
 
 Applying the first lambda to the argument give us back the same expression.
 
- 
+
+- **Divergence** matters in programming, because terms that _diverge_ are terms that **don’t produce an answer or meaningful result**. _Understanding what will terminate, means understanding what programs will do useful work and return the answer we want_.
+
+
+
+## Closing statement
+
+- **_Haskell_** is a lambda calculus. Actually, Haskell is a typed lambda calculus —more on types later— . That is, the meaning of Haskell programs is centered around evaluating expressions rather than executing instructions, although Haskell has a way to execute instructions, too.
+
+
+- **_A lambda abstraction_** is an **anonymous function** or lambda term e.g. `(λx.x + 1)` .The head of the expression, `λx.`, abstracts out the term `x + 1`.
+
+
+- **_In functional Programing_** all functions take one argument and return one result.
+
+
+- **_Application_** is how one evaluates or reduces lambdas, binding the parameter to the concrete argument.
+
+
+- **_Normal order_** is a common evaluation strategy in lambda calculi. Normal order means evaluating the leftmost, outermost lambdas first, evaluating nested terms after you’ve run out of arguments to apply. **Normal order isn’t how Haskell code is evaluated.** **Haskell’s evaluation strategy is** **_call-by-need_**, **instead**.
+
+
+- **_Lambda calculus_** is a formal system for expressing programs in terms of abstraction and application.
 
  
 
