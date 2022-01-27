@@ -4,7 +4,7 @@ sayHello ::  String -> IO ()
 sayHello x = 
   putStrLn ("Hello, " ++ x ++ "!")
 
-
+{- First Exploration -}
 half x = x / 2
 
 square x =  x * x
@@ -15,22 +15,27 @@ myPi x = 3.14 * x^2
 
 aPi x = pi * x ^ 2
 
-
+{- Infix function i.e. Operator and PreFix Function in Infix Position -}
 functionInInfix = 10 `div` 4
 
 normalFunction  = div 10 4
 
+{- Precedence -}
 
-{-
+{- 
+
   perimeter' = perimeter
   
   Because * is precedence 8 and + 7
+
 -}
 
 perimeter x y = (x * 2) + (y * 2)
 
 perimeter' x y =  x * 2 + y * 2  
 
+
+{- Indentation rules -}
 
 {-
   In source code files, indentation often replaces syntactic markers like curly braces, semicolons, and parentheses. 
@@ -60,4 +65,9 @@ foo x =
       let y = x * 2 
           z = x ^ 2 
       in 2 * y * z
-      
+
+
+
+
+
+
