@@ -1,4 +1,4 @@
-module Learn where
+module Learn( ) where
 
 sayHello ::  String -> IO ()
 sayHello x = 
@@ -66,8 +66,16 @@ foo x =
           z = x ^ 2 
       in 2 * y * z
 
+{- On the use of infix $ :: (a -> b) -> a -> b i.e. f $ a = f a where f :: a -> b -}
+dollarSign = (3^) $ 2 + 2 -- 3^(2 + 2)
 
+dollarSign' = (3^) 2 + 2  -- (3^2) + 2
 
+{- Sectioning -}
 
+plus3 = (+3)
 
+operation = plus3 4
 
+--To refer to an operator on its own i.e. as a function
+plus = (+)
