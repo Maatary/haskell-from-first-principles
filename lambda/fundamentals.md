@@ -31,9 +31,9 @@ The lambda calculus has three basic components, or _lambda terms_: expressions, 
 
 - Abstractions consist of two parts: the head and the body. The head of the function is a 𝜆 (lambda) followed by a variable name. The body of the function is another expression.
 
-Example of function
-
-`λx.x`
+  > Example of function  
+  > 
+  > `λx.x`  
 
 - The variable named in the head is the parameter and binds all instances of that same variable in the body of the function. That means, when we apply this function to an argument, each `x` in the body of the function will have the value of that argument.
 
@@ -60,11 +60,11 @@ Example of function
 
 - When we apply a function to an argument, we substitute the input expression for all instances of bound variables within the body of the abstraction. You also eliminate the head of the abstraction, since its only purpose is to bind a variable. This process is called _beta reduction_.
 
-Example of application
-
-`(λx.x) 2`
-
-`2`
+  > Example of application  
+  > 
+  > `(λx.x) 2`  
+  > 
+  > `2`
 
 - Beta reduction is this process of applying a lambda term to an argument, replacing the bound variables with the value of the argument, and eliminating the head.
 
