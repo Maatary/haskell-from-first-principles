@@ -70,21 +70,21 @@ The lambda calculus has three basic components, or _lambda terms_: expressions, 
 
 - Applications in the lambda calculus are left associative.
 
-`(λx.x)(λy.y)z`
-
-is equivalent to
-
-`((λx.x)(λy.y))z`
-
-which reduce to
-
-`z`
+  > `(λx.x)(λy.y)z`
+  >
+  > is equivalent to
+  >
+  > `((λx.x)(λy.y))z`
+  >
+  > which reduce to
+  >
+  > `z`
 
 - Beta reduction stops when there are no longer unevaluated functions applied to arguments.
 
 - Sometimes, the body expression has variables that are not named in the head. We call those variables free variables.
 
-`λx.xy`
+  > `λx.xy`
 
 
 ## Multiple arguments
@@ -92,12 +92,12 @@ which reduce to
 
 - Each lambda can only bind one parameter and can only accept one argument. **Functions that require multiple arguments have multiple, nested heads.** **When you apply it once and eliminate the first (leftmost) head, the next one is applied and so on.** This **formulation** was originally discovered by Moses Schönfinkel in the 1920s but was later rediscovered and named after **_Haskell Curry_** and is commonly called **_currying_**.
 
+   > `λxy.xy`
+   >
+   > is a convienient shorthand for
+   >
+   > `λx.(λy.xy)`
 
-`λxy.xy`
-
-is a convienient shorthand for
-
-`λx.(λy.xy)`
 
 - When applying the first argument, we’re binding `x`, eliminating the outer lambda, and **get `λy.xy` with `x` being whatever the outer lambda was bound to**.
 
@@ -114,8 +114,9 @@ is a convienient shorthand for
 
 - **Beta normal form** is when you cannot beta reduce (apply lambdas to arguments) the terms any further. This corresponds to a fully evaluated expression, or, **in programming**, **a fully executed program**.
 
-
-    The expression 2000 / 1000 is not fully evaluated. The division function has been fully applied to two arguments, but it hasn’t yet been reduced or evaluated. In other words, there’s a simpler form it can be reduced to—the number two. The normal form, therefore, is 2.
+  > The expression 2000 / 1000 is not fully evaluated. The division function has been fully applied to two 
+  > arguments, but it hasn’t yet been reduced or evaluated. In other words, there’s a simpler form it can be 
+  > reduced to—the number two. The normal form, therefore, is 2.
 
 - Application is what makes evaluation/simplification possible.
 
@@ -136,9 +137,9 @@ is a convienient shorthand for
 - Not all reducible lambda terms reduce to a normal form. This isn’t because they’re already fully reduced, but because they diverge. Divergence here means that the reduction process never terminates or ends.
 
 
-Example of divergent lambda term called **omega**
-
-`(λx.xx)(λx.xx)`
+  > Example of divergent lambda term called **omega**
+  >
+  > `(λx.xx)(λx.xx)`
 
 Applying the first lambda to the argument give us back the same expression.
 
