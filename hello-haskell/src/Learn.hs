@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Redundant section" #-}
 module Learn( ) where
 
 sayHello ::  String -> IO ()
