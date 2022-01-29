@@ -72,7 +72,7 @@
 - Haskell uses a **_non-strict evaluation_** (sometimes called “_**lazy evaluation**_”) **_strategy_** that _defers_ evaluation of terms until they’re forced to evaluate by other terms that refer to them.
 
 
-- Values are irreducible, but applications of functions to arguments are reducible.
+- **Values** are _irreducible_, but **applications of functions to arguments** are _reducible_.
 
 
 - As in the _lambda calculus_, _application is evaluation_: applying a function to an argument allows evaluation or reduction.
