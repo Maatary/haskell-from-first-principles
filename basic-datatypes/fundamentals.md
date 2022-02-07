@@ -32,9 +32,12 @@
    > `type Name = String`  
    > `data Pet = Cat | Dog Name`
 
+- We use the expression _makes up_* to highlight the fact that although in colloquial haskell, Data  constructor are referred as the _values_ that inhabit the _types_ of the Data declaration, **technically** they are not, but actually are the _means_ to makes those value. The conflation comes from the fact that the value actually created, is a value **"tagged"** by the name of the Data constructor (_more explanation  below_). 
+
+
 - **Data constructors** themselves have a type and can either be constant values _(nullary)_ or _take one or more arguments_, like functions.
 
-   > The data constructors have the following types:  
+   > The data constructors above have the following types:  
    >
    > `Prelude> :t Cat`   
    > `Cat :: Pet `  
@@ -58,12 +61,14 @@
     
     - They group values together and **tag** alternatives in an algebraic data type.
   
-    - In other words, when **applied**, the value constructed is tagged by the name of the Data constructor.
+    - In other words, when **applied**, the value constructed is **tagged** by the name of the Data constructor.
   
     - In the above, there won't be any value of type Dog or Cat, there is will be value tagged as Dog or Cat.
   
-    - For Instance, in ** `x = Dog "Goerge" ` ** `x` has type **Pet**, not **Dog**
-  
+    - For Instance, in ** `x = Dog "Goerge" ` ** `x` has type **Pet**, not **Dog**. However, `"Goerge"` is tagged with **Dog**.
+
+
+- A Deep explanation of the notion of tag can be found here: [clarifying-data-constructor-in-haskell](https://stackoverflow.com/questions/65599830/clarifying-data-constructor-in-haskell?rq=1)
 
 
 - **Type constructors** in Haskell **are not values** and can only be used in **type signatures**.
