@@ -31,6 +31,10 @@
    >
    > `type Name = String`  
    > `data Pet = Cat | Dog Name`
+  
+  
+- In the above example there are two **data constructors** and the `|` denote a _disjunction_, which makes the datatype a **Sum type**. That is, a Pet is either a Cat or a Dog. 
+
 
 - We use the expression _makes up_* to highlight the fact that although in colloquial haskell, Data  constructor are referred as the _values_ that inhabit the _types_ of the Data declaration, **technically** they are not, but actually are the _means_ to makes those value. The conflation comes from the fact that the value actually created, is a value **"tagged"** by the name of the Data constructor (_more explanation  below_). 
 
@@ -39,9 +43,9 @@
 
    > The data constructors above have the following types:  
    >
-   > `Prelude> :t Cat`   
+   > `λ> :t Cat`   
    > `Cat :: Pet `  
-   > `Prelude> :t Dog`    
+   > `λ> :t Dog`    
    > `Dog :: Name -> Pet`  
    >
    > Here `Dog :: Name -> Pet` really highlight what is meant by the type of the **Data Constructor**.  
@@ -92,7 +96,7 @@
 
 
 
-## Numeric Datatypes:
+### Numeric Datatypes:
 
 
 - We have **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as Fractional.  It is important to note however that **Integral** and **Fractional** are not _datatypes_. They are _Types Classes_ that (in short) group together the operations common to those groups of _datatypes_. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the _numeric datatypes_. 
@@ -100,14 +104,93 @@
 
 - Integral and Fractional are type classes. They represent operation on respectively all Integral datatype (Int, Integer, ...) and Fractional datatype(Float, Double, ....). Integral and Fractional are not datatypes.
 
+   > Example of Function found in the Fractional Type Class
+   > 
+   > `λ> :t (/)` 
+   > 
+   > `(/) :: Fractional a => a -> a -> a`
 
-- In `(/) :: Fractional a => a -> a -> a` , `Fractional a =>` can be red as  _**with the constraint of having a Fractional instance for type a we have ...**_
+
+- In the above, `Fractional a =>` can be red as  _**with the constraint of having a Fractional instance for type a we have ...**_ Another way to read it can be, _**with the constraint that type a implements the Fractional Type Class, we have ...**_
 
 
 - The _literal values_ of numbers are _polymorphic values_, meaning they can be of different types depending on the context or type annotation.
 
 
 - It is critical to note that when the type is unspecified, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the polymorphic value rather than the _concrete datatypes_.
+
+- We can compare values with the following infix Operators:
+
+   > `λ> x = 5`  
+   > 
+   > `λ> x == 5`  
+   > `True`  
+   > 
+   > `λ> x == 6`  
+   > `False`  
+   > 
+   > `λ> x < 7`  
+   > `True` 
+   > 
+   > `λ> x > 3`  
+   > `False`
+   > 
+   > `λ> x == 5`  
+   > `True`
+   > 
+   > `λ> x /= 5`  
+   > `False` 
+
+### Eq & Ord Type Class
+
+ - Following on the above, looking at the type of the infix operator we get:  
+ 
+   > `λ> :t (==)`  
+   > `(==) :: Eq a => a -> a -> Bool`   
+   > 
+   > `λ> :t (<)`   
+   > `(<) :: Ord a => a -> a -> Bool`
+
+
+- Like operation on **Numeric** e.g. `(+)` `(/)` given by **Integral/Fractional/Num**, comparison operators are provided by the  **Eq** and **Ord** _Types Classes_. However, it is worth noticing the _datatypes_ that _implement_ (_i.e. have instances of_) these _Types Classes_ go beyond **Numerics**. It is anything that can be _compared_ or _ordered_. 
+
+   > `λ> 'a' == 'b'`  
+   >  `False`
+   > 
+   > `λ> "Julie" == "Chris"`  
+   > `False`  
+   >  
+   > `λ> "Julie" == "Chris" False`  
+   > 
+   > `λ> ['c', 'b'] > ['a', 'b']`   
+   > `True`
+
+
+- Note that this is leaning on the Ord type class instances for the **List** and **Char** type. You can only compare lists of items where the items themselves also have an instance of Ord. 
+
+    ``` 
+    instance (Eq a) => Eq [a] where   
+        {-# SPECIALISE instance Eq [[Char]] #-}  
+        {-# SPECIALISE instance Eq [Char] #-}  
+        {-# SPECIALISE instance Eq [Int] #-}   
+         []     == []     = True   
+         (x:xs) == (y:ys) = x == y && xs == ys   
+         _xs    == _ys    = False
+    ```    
+
+- The code above taken from _GCH.prim.Classes.sh_ states in the first line that the `Eq [a]` instance is defined with the constrained that (Eq a) exists. 
+
+
+
+### Tuples
+
+- **A tuple** is an ordered grouping of values. In Haskell, you cannot have a tuple with only one element, but there is a “zero” tuple, also called _unit_ or _()_.
+
+
+- **The types** of the elements of **tuples** are allowed to vary, so both `(String, String)` and `(Integer, String)` are valid **tuple types**.
+
+
+- **Tuples in Haskell** are the usual means of briefly carrying around multiple values without giving that combination its own name.
 
 
 ## Type Classes
@@ -118,15 +201,17 @@
 - **In Haskell,** **type classes** are _unique pairings_ of a _class_ and a _concrete instance_. This means that if a given type `a` has an instance of `Eq`, it has only one instance of `Eq`.
 
 
-## Tuples
+## If-Then-Else Expression
 
-- **A tuple** is an ordered grouping of values. In Haskell, you cannot have a tuple with only one element, but there is a “zero” tuple, also called _unit_ or _()_.
+   > if CONDITION   
+   > then EXPRESSION_A   
+   > else EXPRESSION_B  
+
+- If the condition (_which must evaluate to Bool_) **reduces** to the value True, then EXPRESSION_A is the result, otherwise it’s EXPRESSION_B.
 
 
-- **The types** of the elements of **tuples** are allowed to vary, so both `(String, String)` and `(Integer, String)` are valid **tuple types**.
+- The types of the expressions in the then and else clauses must be the same
 
-
-- **Tuples in Haskell** are the usual means of briefly carrying around multiple values without giving that combination its own name.
 
 
 ## Functions Arity & Currying 
