@@ -94,10 +94,28 @@
 
 ## Numeric Datatypes:
 
+
+- We have **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as Fractional.  It is important to note however that **Integral** and **Fractional** are not _datatypes_. They are _Types Classes_ that (in short) group together the operations common to those groups of _datatypes_. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the _numeric datatypes_. 
+
+
 - Integral and Fractional are type classes. They represent operation on respectively all Integral datatype (Int, Integer, ...) and Fractional datatype(Float, Double, ....). Integral and Fractional are not datatypes.
 
 
-- In `(/) :: Fractional a => a -> a -> a` , `Fractional a =>` can be red as _with constraint Fractional a we have_  or  _with Instance Fractional a we have_ , or more verbose, _**with the constraint of having a Franctional instance for type a**_
+- In `(/) :: Fractional a => a -> a -> a` , `Fractional a =>` can be red as  _**with the constraint of having a Fractional instance for type a we have ...**_
+
+
+- The _literal values_ of numbers are _polymorphic values_, meaning they can be of different types depending on the context or type annotation.
+
+
+- It is critical to note that when the type is unspecified, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the polymorphic value rather than the _concrete datatypes_.
+
+
+## Type Classes
+
+- **A type class** is a set of operations defined with respect to a polymorphic type. When a type has an instance of a type class, values of that type can be used in the standard operations defined for that type class.
+
+
+- **In Haskell,** **type classes** are _unique pairings_ of a _class_ and a _concrete instance_. This means that if a given type `a` has an instance of `Eq`, it has only one instance of `Eq`.
 
 
 ## Tuples
@@ -109,15 +127,6 @@
 
 
 - **Tuples in Haskell** are the usual means of briefly carrying around multiple values without giving that combination its own name.
- 
-
-
-## Type Classes
-
-- **A type class** is a set of operations defined with respect to a polymorphic type. When a type has an instance of a type class, values of that type can be used in the standard operations defined for that type class.
-
-
-- **In Haskell,** **type classes** are _unique pairings_ of a _class_ and a _concrete instance_. This means that if a given type `a` has an instance of `Eq`, it has only one instance of `Eq`.
 
 
 ## Functions Arity & Currying 
