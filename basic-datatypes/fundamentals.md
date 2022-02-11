@@ -214,13 +214,36 @@
 
 ## Tuples
 
-- **A tuple** is an ordered grouping of values. In Haskell, you cannot have a tuple with only one element, but there is a “zero” tuple, also called _unit_ or _()_.
+
+
+- **Tuples in Haskell** are the usual means of briefly carrying around multiple values without giving that combination its own name. That is, is allows to store and pass around multiple values within a single, composite value, where the type of that value is tuple rather than a user define type. 
+
+
+- **A tuple** is an ordered grouping of values. 
 
 
 - **The types** of the elements of **tuples** are allowed to vary, so both `(String, String)` and `(Integer, String)` are valid **tuple types**.
 
 
-- **Tuples in Haskell** are the usual means of briefly carrying around multiple values without giving that combination its own name.
+- **Tuple have a fixed number of constituents**. We refer to tuples by the number of values in each tuple: the 2-tuple or pair, for example, has two values inside it, (x, y); the 3-tuple or triple has three, (x, y, z), and so on. This number is also known as the **tuple’s arity**.
+  
+
+- **There is no tuple with only one element** in Haskell,  but there is a **“zero” tuple**, also called _**unit**_ or _**()**_.
+
+
+- **Tuples have a distinctive, built-in syntax that is used at both type and term levels.**
+  
+   > `λ> :i (,)`   
+   > `data (,) a b = (,) a b`   
+
+
+- **The type Constructor of Tuple `(,) a b`** has two parameters, represented by the **type variables** **a** and **b**. Those have to be applied to concrete types, much as variables at the term level have to be applied to values in order to evaluate a function. It is a *parameterized type constructor*, as opposed to a *type constant* such as Bool. That is, the **type variables** makes it a polymorphic type constructor, or polymorphic type in short. In other words, the **Tuple Type** give rise to multiple concrete type upon application. e.g. `(String, String)` or `(String, Int)` are concrete Tuple Type. 
+
+- **The Data Constructor of Tuple `(,) a b`** has two parameters, represented by **the variables of type a and b**.
+
+
+- **Where the Type constructor is applied to types (i.e. a and b), the Data Constructor is applied to values of type a and b.**
+
 
 
 ## Type Classes
