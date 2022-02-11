@@ -69,7 +69,7 @@
   
     - In the above, there won't be any value of type Dog or Cat, there is will be value tagged as Dog or Cat.
   
-    - For Instance, in ** `x = Dog "Goerge" ` ** `x` has type **Pet**, not **Dog**. However, `"Goerge"` is tagged with **Dog**.
+    - For Instance, in `x = Dog "Goerge" `, `x` has type **Pet**, not **Dog**. However, `"Goerge"` is tagged with **Dog**.
 
 
 - A Deep explanation of the notion of tag can be found here: [clarifying-data-constructor-in-haskell](https://stackoverflow.com/questions/65599830/clarifying-data-constructor-in-haskell?rq=1)
@@ -96,28 +96,59 @@
 
 
 
-### Numeric Datatypes:
+## Numeric Datatypes:
 
 
-- We have **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as Fractional.  It is important to note however that **Integral** and **Fractional** are not _datatypes_. They are _Types Classes_ that (in short) group together the operations common to those groups of _datatypes_. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the _numeric datatypes_. 
+- We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not _datatypes_. They are _Types Classes_ that (in short) group together the operations common to those groups of _datatypes_. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the _numeric datatypes_. 
 
+### Num, Integral & Fractional Type Classes
 
-- Integral and Fractional are type classes. They represent operation on respectively all Integral datatype (Int, Integer, ...) and Fractional datatype(Float, Double, ....). Integral and Fractional are not datatypes.
+- Num, Integral and Fractional are **type classes**. Num, represents operations common to all numeric datatypes, while Integral and Fractional respectively represent operation specific but common to all Integral datatype (Int, Integer, ...) and Fractional datatype (Float, Double, ....) e.g. `(+)` `(-)` `(*)` `(/)` `div` ...
 
+   > Example of Function found in the Num Type Class
+   >
+   > `λ> :t (+)`
+   >
+   > `(+) :: Num a => a -> a -> a`
+  
    > Example of Function found in the Fractional Type Class
    > 
    > `λ> :t (/)` 
    > 
    > `(/) :: Fractional a => a -> a -> a`
 
+   > Example of Function found in the Integral Type Class
+   >
+   > `λ> :t div`
+   >
+   > `div :: Integral a => a -> a -> a`
 
+  
 - In the above, `Fractional a =>` can be red as  _**with the constraint of having a Fractional instance for type a we have ...**_ Another way to read it can be, _**with the constraint that type a implements the Fractional Type Class, we have ...**_
 
 
-- The _literal values_ of numbers are _polymorphic values_, meaning they can be of different types depending on the context or type annotation.
+- In Haskell we say that **Num** is a **Super Class** of **Integral** and **Fractional**. Note this has nothing to do with the _object-oriented paradigm_. Here **Super Class** is because the Fractional and Integral **type class constraint**, state that the types that implement them, must already implement the Num type class. **It is a constraint dependency !**
 
+  > λ> :i Fractional
+  > type Fractional :: * -> Constraint
+  > class Num a => Fractional a where
 
-- It is critical to note that when the type is unspecified, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the polymorphic value rather than the _concrete datatypes_.
+  > λ> :i Integral
+  > type Integral :: * -> Constraint
+  > class Num a => Integral a where
+
+- The **literal values** of numbers are _**polymorphic values**_, meaning they can be of different types depending on the context or type annotation.
+
+   > λ> :t 2
+   > 2 :: Num p => p
+   > λ> :t 2::Double
+   > 2::Double :: Double
+   > λ> :t 2.0
+   > 2.0 :: Fractional p => p
+
+- It is critical to note that when the type is unspecified, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the _**polymorphic value**_ rather than the _concrete datatypes_.
+
+### Eq & Ord Type Classes
 
 - We can compare values with the following infix Operators:
 
@@ -141,7 +172,6 @@
    > `λ> x /= 5`  
    > `False` 
 
-### Eq & Ord Type Class
 
  - Following on the above, looking at the type of the infix operator we get:  
  
@@ -182,7 +212,7 @@
 
 
 
-### Tuples
+## Tuples
 
 - **A tuple** is an ordered grouping of values. In Haskell, you cannot have a tuple with only one element, but there is a “zero” tuple, also called _unit_ or _()_.
 
