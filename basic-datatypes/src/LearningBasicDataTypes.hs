@@ -56,3 +56,29 @@ greetIfCool03 coolness =
   where 
     cool v = v == "downright frosty yo"
 
+
+{- chapter Exercises -}
+
+-- 1) length :: Foldable t => t a -> Int
+
+-- 3) (a) 6 / length [1,2,3] can't work because / takes two fractional and length returns an Int.
+
+-- 4) (b) 6 div length [1,2,3] would fix that
+
+isPalindrome :: Eq a => [a] -> Bool
+isPalindrome x = x == reverse x
+
+
+{-
+  Note that to call this function with a negative number you must put parentheses e.g. myAbs (-4)
+  or write  `myAbs $ negate 4` or `myAbs $ -4`
+  This is because of the special treatment of minus.
+  See https://stackoverflow.com/questions/28858161/why-doesnt-minus-work-for-operator-sections
+-}
+myAbs :: (Ord a, Num a) => a -> a
+myAbs x =
+  if x > 0
+    then
+      x
+    else
+      -x
