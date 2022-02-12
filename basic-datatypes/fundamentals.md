@@ -235,8 +235,8 @@
 
 - **Tuples have a distinctive, built-in syntax that is used at both type and term levels.**
   
-    > `λ> :i (,)`   
-    > `data (,) a b = (,) a b`   
+   > `λ> :i (,)`   
+   > `data (,) a b = (,) a b`   
 
 
 - **The type Constructor of Tuple `(,) a b`** has two parameters, represented by the **type variables** **a** and **b**. Those have to be applied to concrete types, much as variables at the term level have to be applied to values in order to evaluate a function. It is a *parameterized type constructor*, as opposed to a *type constant* such as Bool. That is, the **type variables** makes it a polymorphic type constructor, or polymorphic type in short. In other words, the **Tuple Type** give rise to multiple concrete type upon application. e.g. `(String, String)` or `(String, Int)` are concrete Tuple Type. 
@@ -276,13 +276,46 @@
 - **All the elements** of a list must be of the **same type**. 
 
 
-- **Lists have their own distinct [] syntax**. Like the tuple syntax, it is used for both (i) the **type constructor** in _type signatures_, and (ii) the **Data Constructor** at the _term level_ to express list values. 
+- **Lists have their own distinct `[]` syntax**. Like the tuple syntax, it is used for both (i) the **type constructor** in _type signatures_, and (ii) the **Data Constructor** at the _term level_ to express list values. 
 
 
 - **The number of values** that will be in the list isn’t specified in the type—unlike tuples, where the _arity_ is set in the type and is _immutable_.
 
 
+- The following provide a quick glimpse at the List datatype, which will be studied in details in his own chapter. 
 
+   > The List DataType
+   >
+   > `λ> :i []`   
+   > `data [] a = [] | a : [a]`  
+
+   > List Data Constructor Type Signature  
+   > 
+   > `λ> :t (:)`   
+   > `(:) :: a -> [a] -> [a]`  
+   > 
+   > `λ> :t []`  
+   > `[] :: [a]`  
+
+    ```haskell
+    λ> p = "Papuchon" 
+    λ> awesome = [p, "curry", ":)"] 
+    λ> awesome 
+    λ> ["Papuchon","curry",":)"] 
+    λ> :t awesome 
+    λ> awesome :: [[Char]]
+  
+    λ> "Maat" : ["Papuchon","curry",":)"] -- Use the `:` infix data constructor 
+    λ> ["Maat","Papuchon","curry",":)"]
+    λ> "Deamon" : [] -- Use the `:` infix data constructor & the `[]` nullary data constructor
+    λ> ["Deamon"]
+    λ> ["Deamon"] ++  ["Maat","Papuchon","curry",":)"]
+    λ> ["Deamon","Maat","Papuchon","curry",":)"]
+    λ> :t (++)
+    λ> (++) :: [a] -> [a] -> [a]
+    ```
+
+- Things like the special syntax that allows to create a list by the just writing `[1,2,3]` or  `["Papuchon","curry",":)"]` will  be further address in the List chapter. 
 
 
 ## Type Classes
