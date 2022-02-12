@@ -270,6 +270,19 @@
 
 ## List
 
+- **Lists** are another type used to contain multiple values within a single value. 
+
+
+- **All the elements** of a list must be of the **same type**. 
+
+
+- **Lists have their own distinct [] syntax**. Like the tuple syntax, it is used for both (i) the **type constructor** in _type signatures_, and (ii) the **Data Constructor** at the _term level_ to express list values. 
+
+
+- **The number of values** that will be in the list isn’t specified in the type—unlike tuples, where the _arity_ is set in the type and is _immutable_.
+
+
+
 
 
 ## Type Classes
