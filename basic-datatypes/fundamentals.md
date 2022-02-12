@@ -200,7 +200,7 @@
 
 - Note that this is leaning on the Ord type class instances for the **List** and **Char** type. You can only compare lists of items where the items themselves also have an instance of Ord. 
 
-    ``` 
+    ```haskell
     instance (Eq a) => Eq [a] where   
         {-# SPECIALISE instance Eq [[Char]] #-}  
         {-# SPECIALISE instance Eq [Char] #-}  
@@ -235,8 +235,8 @@
 
 - **Tuples have a distinctive, built-in syntax that is used at both type and term levels.**
   
-   > `λ> :i (,)`   
-   > `data (,) a b = (,) a b`   
+    > `λ> :i (,)`   
+    > `data (,) a b = (,) a b`   
 
 
 - **The type Constructor of Tuple `(,) a b`** has two parameters, represented by the **type variables** **a** and **b**. Those have to be applied to concrete types, much as variables at the term level have to be applied to values in order to evaluate a function. It is a *parameterized type constructor*, as opposed to a *type constant* such as Bool. That is, the **type variables** makes it a polymorphic type constructor, or polymorphic type in short. In other words, the **Tuple Type** give rise to multiple concrete type upon application. e.g. `(String, String)` or `(String, Int)` are concrete Tuple Type. 
@@ -255,6 +255,20 @@
 
 
 - **The two type variables are different**, so that allows for tuples that contain values of two different types. _The types are not, however, required to be different_.
+
+    ```haskell
+    λ> (,) 8 "juile" -- classic data constructor syntax
+    (8,"juile")
+  
+    λ> (8, "julie")  -- same as above but with special syntax
+    (8,"julie")
+  
+    λ> :t (8, "julie")
+    (8, "julie") :: Num a => (a, [Char]) -- the most generic type for 8 is that it implements the Num type class
+    ```
+
+
+## List
 
 
 
