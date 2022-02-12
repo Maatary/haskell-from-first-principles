@@ -129,22 +129,24 @@
 
 - In Haskell we say that **Num** is a **Super Class** of **Integral** and **Fractional**. Note this has nothing to do with the _object-oriented paradigm_. Here **Super Class** is because the Fractional and Integral **type class constraint**, state that the types that implement them, must already implement the Num type class. **It is a constraint dependency !**
 
-  > λ> :i Fractional
-  > type Fractional :: * -> Constraint
-  > class Num a => Fractional a where
+  > `λ> :i Fractional`  
+  > `type Fractional :: * -> Constraint`    
+  > `class Num a => Fractional a where `   
 
-  > λ> :i Integral
-  > type Integral :: * -> Constraint
-  > class Num a => Integral a where
+  > `λ> :i Integral`  
+  > `type Integral :: * -> Constraint`  
+  > `class Num a => Integral a where`  
 
 - The **literal values** of numbers are _**polymorphic values**_, meaning they can be of different types depending on the context or type annotation.
 
-   > λ> :t 2
-   > 2 :: Num p => p
-   > λ> :t 2::Double
-   > 2::Double :: Double
-   > λ> :t 2.0
-   > 2.0 :: Fractional p => p
+   > `λ> :t 2`  
+   > `2 :: Num p => p`  
+  
+   > `λ> :t 2::Double`  
+   > `2::Double :: Double`  
+  
+   > `λ> :t 2.0`  
+   > `2.0 :: Fractional p => p`  
 
 - It is critical to note that when the type is unspecified, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the _**polymorphic value**_ rather than the _concrete datatypes_.
 
@@ -239,10 +241,20 @@
 
 - **The type Constructor of Tuple `(,) a b`** has two parameters, represented by the **type variables** **a** and **b**. Those have to be applied to concrete types, much as variables at the term level have to be applied to values in order to evaluate a function. It is a *parameterized type constructor*, as opposed to a *type constant* such as Bool. That is, the **type variables** makes it a polymorphic type constructor, or polymorphic type in short. In other words, the **Tuple Type** give rise to multiple concrete type upon application. e.g. `(String, String)` or `(String, Int)` are concrete Tuple Type. 
 
-- **The Data Constructor of Tuple `(,) a b`** has two parameters, represented by **the variables of type a and b**.
+
+- **The Data Constructor of Tuple `(,) a b`** has two parameters, represented by **the variables of type a and b**. That is, this is the term level. In other worlds, when a Data constructor is Parameterized, the Parameters are Values of which the types is provided as Parameters. 
 
 
-- **Where the Type constructor is applied to types (i.e. a and b), the Data Constructor is applied to values of type a and b.**
+- **Where the Type constructor is applied to Types (i.e. a and b), the Data Constructor is applied to Values of type a and b.** **The types of those values are the parameters of the Data Constructor**. Here, the first one has **type a**, so it's just a **value** of the **parameter type a** introduced in the type Constructor.
+
+
+- **The Signature of a Data constructor that takes arguments i.e. values, is the type of those values !!**
+
+
+- **The Tuple Data Constructor is a Product Type**, **not a Sum Type**. A **product type** represents a logical conjunction: you must supply both arguments to construct a value. 
+
+
+- **The two type variables are different**, so that allows for tuples that contain values of two different types. _The types are not, however, required to be different_.
 
 
 
