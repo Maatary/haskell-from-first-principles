@@ -369,6 +369,26 @@
    > isEqual x y = x == y  
 
 
+## Others
+
+- A function whose body is not defined yet can be written as such. 
+
+   > `f x = undefined`
 
 
+## Names
 
+- **In Haskell, there are seven categories of entities that have names**: functions, term-level variables, data constructors, type variables, type constructors, type classes, and modules. 
+
+
+- **Term-level** variables and data constructors exist in your terms. Term level is where your values live and is the code that executes when your program is running.
+
+- At the **type level**, which is used during the static analysis and verification of your program, we have type variables, type constructors, and type classes.
+
+- Lastly, for the purpose of organizing our code into coherent groupings across different files, we have **modules**.
+
+
+## Variables Naming Convention
+
+ - Type variables (that is, variables in type signatures) generally start at a and go from there: a, b, c, and so forth. You may sometimes see them with numbers appended to them, e.g., a1.
+ 

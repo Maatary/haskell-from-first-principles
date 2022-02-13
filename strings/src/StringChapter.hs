@@ -61,7 +61,7 @@ dropTake d t = take t . drop d
 takeDrop :: Int -> Int -> [a] -> [a]
 takeDrop t d = drop d . take t
 
--- The function  expect as input "Curry is awesome"
+-- The function expect as input "Curry is awesome"
 rvrs  =
   let
     curryIsAwesome = "Curry is awesome"

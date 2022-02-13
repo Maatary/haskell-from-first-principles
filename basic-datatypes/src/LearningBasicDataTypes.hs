@@ -22,7 +22,7 @@ tree :: Tree Integer
 tree = Node 2 (Node 3 Leaf Leaf) Leaf
 
 
-{- Note converting most thing (including Numeric) to String is done with show. -}
+{- Note: converting most thing (including Numeric) to String is done with show. -}
 
 
 {- If Expressions -}
@@ -59,16 +59,31 @@ greetIfCool03 coolness =
 
 {- chapter Exercises -}
 
+awesome :: [[Char]]
+awesome = ["Papuchon", "curry", ":)"]
+
+also :: [[Char]]
+also = ["Quake", "The Simons"]
+
+allAwesome :: [[[Char]]]
+allAwesome = [awesome, also]
+
+
+
 -- 1) length :: Foldable t => t a -> Int
 
 -- 3) (a) 6 / length [1,2,3] can't work because / takes two fractional and length returns an Int.
 
 -- 4) (b) 6 div length [1,2,3] would fix that
 
+
+
+-- 8)
 isPalindrome :: Eq a => [a] -> Bool
 isPalindrome x = x == reverse x
 
 
+-- 9)
 {-
   Note that to call this function with a negative number you must put parentheses e.g. myAbs (-4)
   or write  `myAbs $ negate 4` or `myAbs $ -4`
@@ -82,3 +97,35 @@ myAbs x =
       x
     else
       -x
+
+-- 10)
+f :: (a, b) -> (c, d) -> ((b, d), (a, c))
+f x y =
+  let
+    a = fst x
+    b = snd x
+    c = fst y
+    d = snd y
+  in
+    ((b, d), (a, c))
+
+
+
+{- Correcting syntax -}
+
+-- 1)
+
+x' = (+)
+
+f' xs =
+  (x') w 1
+  where w = length xs
+
+-- 2)
+
+id' = \x -> x
+
+-- 3)
+
+fst' (a,b) = a
+
