@@ -15,7 +15,14 @@ type Name = String
 
 data Pet  = Cat | Dog Name deriving (Show)
 
--- Playing around
+-- Pattern Matching of Pet
+makeSound :: Pet ->  String
+makeSound Cat      = "Miwow"
+makeSound (Dog _)  = "Woof Woof"
+
+
+
+-- Playing around - inspired from https://wiki.haskell.org/Constructor
 data Tree a = Leaf | Node a (Tree a) (Tree a) deriving (Show)
 
 tree :: Tree Integer
@@ -109,7 +116,9 @@ f x y =
   in
     ((b, d), (a, c))
 
-
+-- 10) This is already pattern matching i.e. (a, b) (c, d) are the Data Constructor here.
+f'' :: (a, b) -> (c, d) -> ((b, d), (a, c))
+f'' (a, b) (c, d) = ((b, d), (a, c))
 
 {- Correcting syntax -}
 
@@ -125,7 +134,7 @@ f' xs =
 
 id' = \x -> x
 
--- 3)
+-- 3) this uses pattern matching i.e. (a, b) is a Data Constructor.
 
 fst' (a,b) = a
 

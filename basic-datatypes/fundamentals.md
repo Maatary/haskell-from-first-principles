@@ -248,7 +248,7 @@
 - **Where the Type constructor is applied to Types (i.e. a and b), the Data Constructor is applied to Values of type a and b.** **The types of those values are the parameters of the Data Constructor**. Here, the first one has **type a**, so it's just a **value** of the **parameter type a** introduced in the type Constructor.
 
 
-- **The Signature of a Data constructor that takes arguments i.e. values, is the type of those values !!**
+- **For a parameterized Data constructor, that is, that takes arguments i.e. values, the parameters are represented by the type of those values !!** The point being that, a Data Constructor Definition is a **Signature**. It is not a function. The actual function is automatically synthesize by the compiler.
 
 
 - **The Tuple Data Constructor is a Product Type**, **not a Sum Type**. A **product type** represents a logical conjunction: you must supply both arguments to construct a value. 
@@ -369,7 +369,7 @@
    > isEqual x y = x == y  
 
 
-## Others
+## Noteworthy
 
 - A function whose body is not defined yet can be written as such. 
 
@@ -383,12 +383,31 @@
 
 - **Term-level** variables and data constructors exist in your terms. Term level is where your values live and is the code that executes when your program is running.
 
+
 - At the **type level**, which is used during the static analysis and verification of your program, we have type variables, type constructors, and type classes.
+
 
 - Lastly, for the purpose of organizing our code into coherent groupings across different files, we have **modules**.
 
 
 ## Variables Naming Convention
 
- - Type variables (that is, variables in type signatures) generally start at a and go from there: a, b, c, and so forth. You may sometimes see them with numbers appended to them, e.g., a1.
+ - **Type variables** (that is, variables in type signatures) generally start at **a** and go from there: **a, b, c,** and so forth. You may sometimes see them with numbers appended to them, e.g., **a1**.
+
+
+ - **Functions** can be used as arguments and in that case are typically labeled with variables starting at **f** (followed by **g** and so on). They may sometimes have numbers appended (e.g., **f1**) and may also sometimes be decorated with the **' character**, as in **f'** ( This would be pronounced _"eff-prime"_)
+
+
+ - _**Variables do not have to be a single letter**. In small programs, they often are; in larger programs, they usually should not be a single letter. If there are many variables in a function or program, as is common, it is helpful to have descriptive variable names. It is often advisable in domain-specific code to use domain-specific variable names._
+
+
+ - **Arguments to functions** are most often given names starting at **x**, again occasionally seen numbered as in **x1**. Other single-letter variable names may be chosen when they serve a mnemonic role, such as choosing r to represent a value that is the radius of a circle. 
+
+   - If you have a list of items, and you have used the name **x** to refer to one such item, by convention the list itself will usually be called **xs**, that is, **the plural of x**. You will often see this convention in the form **(x:xs)**, _which means you have a list where the “head,” or first element, is x, and the rest of the list, or “tail,” is xs_.
+
+ 
+
+
+
+
  
