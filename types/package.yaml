@@ -1,6 +1,6 @@
-name:                hello-haskell
+name:                types
 version:             0.1.0.0
-github:              "Maatary/hello-haskell"
+github:              "Maatary/types"
 license:             BSD3
 author:              "Maatary Okouya"
 maintainer:          "example@example.com"
@@ -16,19 +16,20 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/Maatary/hello-haskell#readme>
+description:         Please see the README on GitHub at <https://github.com/Maatary/types#readme>
 
 dependencies:
 - base >= 4.7 && < 5
 
 library:
-  source-dirs: src 
+  source-dirs: src
   when:
     - condition: false
-      other-modules: Paths_hello_haskell
+      other-modules: Paths_basic_types
+
 
 #executables:
-#  hello-haskell-exe:
+#  types-exe:
 #    main:                Main.hs
 #    source-dirs:         app
 #    ghc-options:
@@ -36,10 +37,10 @@ library:
 #    - -rtsopts
 #    - -with-rtsopts=-N
 #    dependencies:
-#    - hello-haskell
+#    - types
 #
 #tests:
-#  hello-haskell-test:
+#  types-test:
 #    main:                Spec.hs
 #    source-dirs:         test
 #    ghc-options:
@@ -47,4 +48,4 @@ library:
 #    - -rtsopts
 #    - -with-rtsopts=-N
 #    dependencies:
-#    - hello-haskell
+#    - types
