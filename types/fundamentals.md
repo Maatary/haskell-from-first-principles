@@ -12,4 +12,4 @@
  - For example, `13` may look like an integer to us, but that would only allow us to use it in computations that take integers (and not, say, in fractional division). For that reason, **the compiler gives it the type with the broadest applicability** (_**most polymorphic**_) and **says it’s a constrained polymorphic value with the** `type Num a => a`:
 
 
- - See Previous chapter (Basic DataTypes) notes, for more detail on numeric values [basic-datatypes](/basic-datatypes/fundamentals.md#numeric-datatypes)
+ - See Previous chapter (Basic DataTypes) notes, for more detail on numeric values [basic-datatypes](../basic-datatypes/fundamentals.md#numeric-datatypes)
