@@ -142,7 +142,7 @@
 
 
 
- - **Explicit parenthesization**, **as when an input parameter is itself a function** (such as in map, above), may be used to indicate order of evaluation, but the implicit associativity of the function type does not mean the inner or final set of parentheses, i.e., the result type, evaluates first. Application is evaluation; in other words, the only way to evaluate anything is by applying functions, and function application is left associative.
+ - **Explicit parenthesization**, **as when an input parameter is itself a function** (such as in map, above), may be used to indicate order of evaluation, but the implicit associativity of the function type does not mean the inner or final set of parentheses, i.e., the result type, evaluates first. Application is evaluation; in other words, the only way to evaluate anything is by applying functions, and **function application is left associative**.
 
 
 ## Partial Application
@@ -224,4 +224,36 @@
 ## Sectioning
 
  - **The term sectioning specifically refers to the partial application of infix operators**, which has **a special syntax** that allows you to **choose whether you’re partially applying the operator to the first or the second argument**.
+
+    ```haskell
+    λ> x = 5
+    λ> y = (2^)
+    λ> z = (^2)
+    λ> y x
+    32
+    λ> z x
+    25
+    
+    λ> :t (^)
+    (^) :: (Integral b, Num a) => a -> b -> a
+    
+    λ> :t (^2)
+    (^2) :: Num a => a -> a
+    
+    λ> :t (2^)
+    (2^) :: (Integral b, Num a) => b -> a
+   
+   
+    λ> celebrate = "woot!"
+    λ> celebrate = (++ "woot!")
+    λ> celebrate "naptime "
+    "naptime woot!"
+    ``` 
+
+ - The **infix nature of the operator** is what allows to choose which arguments to apply first. Otherwise, the left to right rule of function application applies, that is, function application is left associative.
+
+
+ - **The sectioning syntax** exists to allow you some freedom as to which argument of a binary operator you apply the function to.
+
+ - Normal function in prefix form, or infix operator used in their prefix form, can't use sectioning, it would be classic partial application that respect the left to right associativity i.e. first argument get applied first.
 
