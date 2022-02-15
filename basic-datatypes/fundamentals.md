@@ -103,8 +103,6 @@
 
 ### Num, Integral & Fractional Type Classes
 
-- See [numeric datatypes](#numeric-datatypes)
-
 - Num, Integral and Fractional are **type classes**. Num, represents operations common to all numeric datatypes, while Integral and Fractional respectively represent operation specific but common to all Integral datatype (Int, Integer, ...) and Fractional datatype (Float, Double, ....) e.g. `(+)` `(-)` `(*)` `(/)` `div` ...
 
    > Example of Function found in the Num Type Class
