@@ -48,14 +48,30 @@ g :: a -> b -> c -> b; g = undefined
 -- 3)
 h :: (Num a, Num b) => a -> b -> b ; h = undefined
 -- :t h 1.0 2
--- :: Num b => b -- because literal values are polymorphic and the compiler always takes the most generic type.
+-- :: Num b => b -- because literal values are polymorphic and the compiler always takes the most generic type i.e. 2 can be any numeric dataTypes
 
 -- 4)
 -- :t h 1 (5.5::Double) -- because double is ascribed and Num Double exist i.e. conform to the constraint.
 -- :: Double
 
-
 -- 5)
 jackal :: (Ord a, Eq b) => a -> b -> a; jackal = undefined
 -- :t jackal "hello" "your"
 -- :: [Char]
+
+-- 6)
+-- :t jackal "keyword"
+-- :: Eq b => b -> [Char]
+
+-- 7)
+kessel :: (Ord a, Num b) => a -> b -> a; kessel = undefined
+-- :t kessel 1 2
+-- :: (Ord a, Num a) => a -- because we know it is a numeric from the polymorphic literal value, and it has an Ordinal Constraint not going away (num does not make one ordinal, and ordinal does not make one  Num)
+
+-- 8)
+-- :t :t kessel 1 (2::Integer)
+-- :: (Ord a, Num a) => a  -- because only b is concrete fixed to Integer, so the same as above apply here. The result is a . 
+
+-- 9)
+-- :t kessel (1::Integer) 2
+-- :: Integer
