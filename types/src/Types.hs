@@ -70,8 +70,26 @@ kessel :: (Ord a, Num b) => a -> b -> a; kessel = undefined
 
 -- 8)
 -- :t :t kessel 1 (2::Integer)
--- :: (Ord a, Num a) => a  -- because only b is concrete fixed to Integer, so the same as above apply here. The result is a . 
+-- :: (Ord a, Num a) => a  -- because only b is concrete fixed to Integer, so the same as above apply here. The result is a .
 
 -- 9)
 -- :t kessel (1::Integer) 2
 -- :: Integer
+
+
+{- Exercise 3: Parametric -}
+
+-- (1) Can A Function :: a -> a have more than one implementation, let alone one that change the return type ?
+-- No
+
+-- (2) A function :: a -> a -> a  has two possible implementation only, what are they ?
+p1 :: a -> a -> a
+p1 x y = x
+
+p1' :: a -> a -> a
+p1' x y = y
+
+-- (3) a Function :: a -> b -> b. How many implementations can it have? Does its behavior change when the types of a and b change?
+-- 1 implementation possible. No the behavior would not change.
+p2 :: a -> b -> b
+p2 x y = y
