@@ -257,3 +257,57 @@
 
  - Normal function in prefix form, or infix operator used in their prefix form, can't use sectioning, it would be classic partial application that respect the left to right associativity i.e. first argument get applied first.
 
+## Polymorphism
+
+
+ - **Polymorph** is a word of relatively recent provenance. It was invented in the early 19th century from the Greek words **poly** for _"many"_ and **morph** for _"form."_ The **-ic suffix** in polymorphic means _made of._ So, **"polymorphic"** means **made of many forms.** In programming, this is understood to be in contrast to **monomorphic**, **made of one form.**
+
+
+ - **Polymorphic type variables** give us the ability to implement expressions that can accept arguments and return results of different types without having to write variations on the same expression for each type.
+
+
+ - **Broadly speaking, type signatures may have three kinds of types:** **concrete**, **constrained polymorphic**, or **parametrically polymorphic**. 
+
+
+ - **In Haskell, polymorphism divides into two categories:** **parametric polymorphism** and **constrained polymorphism**. _The latter is also known as Ad-hoc polymorphism_
+
+
+ - **Parametric polymorphism** is broader than ad-hoc polymorphism. **Parametric polymorphism** refers to type variables, or parameters, that are fully polymorphic. When unconstrained by a type class, their final, concrete type could be anything. 
+
+
+ - **Constrained polymorphism**, on the other hand, puts type class constraints on a variable, decreasing the number of concrete types it could be, but increasing what you can do with it by defining and bringing into scope a set of specific operations.
+
+
+ - **The function identity** defined in prelude is an example of **a parametric polymorphic function**. Its type variable `a` is parametrically polymorphic and not constrained by a type class. More specifically, its signture says: **for all `a`, get an argument of some type a and return a value of the same type `a`.** It is an example of maximally polymorphic signature. It allows this function to work with any type of data.
+
+   > `id :: a -> a`
+
+
+- **If one applies id to a value of type Int, the a is fixed to type Int.** **By default, type variables are resolved at the left-most part of the type signature** and are fixed once sufficient information to bind them to a concrete type is available.
+
+
+- **A function with the type** `id :: a -> a` **cannot do anything other than return** `a`, because there is no information or method attached to its parameter at all—in other words, **since we don’t have any functions that can do anything interesting with a totally generic value, nothing can be done with** `a`. On the other hand, a function like negate, with the similar-appearing type signature of **Num a => a -> a**, constrains the a variable to be an instance of the Num type class. **In this case, `a` has fewer concrete types it could be, but there is a set of methods you can use, a set of things that can be done with a**.
+
+
+
+- **If a variable represents a set of possible values, then a type variable represents a set of possible types**. When there is no type class constraint, the set of possible types a variable could represent is effectively unlimited. **Type class constraints limit the set of potential types (and, thus, potential values) while also passing along the common functions that can be used with those values.**
+
+
+- **In sum, if a variable could be anything, then there’s little that can be done to it, because it has no specific methods. If it can be some types (say, a type that has an instance of Num), then it has some methods. If it is a concrete type, you lose the type flexibility but, due to the additive nature of type class inheritance, gain more potential methods.**
+
+  - E.g. From a function f:: Integer -> Integer, we can use Num or Integral types classes functions in that function, because Integer can be an instance of Integral, and Num, is a SuperClass of Integral.
+
+
+- **A function is polymorphic when its type signature has variables that can represent more than one type.** That is, its parameters are polymorphic. Parametric polymorphism refers to fully polymorphic (unconstrained by a type class) parameters. Parametricity is the property we get from having parametric polymorphism. 
+
+
+- **Parametricity means that the behavior of a function with respect to the types of its (parametrically polymorphic) arguments is uniform. The behavior cannot change just because it was applied to an argument of a different type.**
+
+
+
+
+
+
+
+
+
