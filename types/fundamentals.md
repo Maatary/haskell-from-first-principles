@@ -192,7 +192,7 @@
 
 ## Automated Currying & Uncurrying
 
- - Prelude has functions to automatically currying and uncurrying function, namely `curry` and `uncurry`. We write our own version to illustrate the all point.
+ - λ has functions to automatically currying and uncurrying function, namely `curry` and `uncurry`. We write our own version to illustrate the all point.
 
    ```haskell
    curry' :: ((a, b) -> c) -> a -> b -> c
@@ -361,4 +361,26 @@
  - **Most of the time, we want to declare our types, rather than relying on type inference.** Adding type signatures to your code can provide guidance to you as you write your functions. **It can also help the compiler give you information about where your code is going wrong.** As programs become longer and more complex, type signatures become even more important, as they help you or other programmers trying to use your code read it and figure out what it’s supposed to do.
 
  
+ - We can make GHCI  gear toward the type that we want inlining the type ascription. Where (1) give us the most generically applicable type, (2) is coerced toward a concrete type, here the type signature is more specific. (3) We can also coerce the type in a where Clause.
 
+    ```haskell
+    --(1) let ghc infer the type
+    Prelude> triple x = x * 3 
+    Prelude> :t triple 
+    triple :: Num a => a -> a
+    ```
+   
+    ```haskell
+    --(2) coerce the type inference with type ascription
+    λ> triple x = x * 3 :: Integer 
+    λ> :t triple 
+    triple :: Integer -> Integer 
+    ```
+   ```haskell
+    --(2) coerce the type inference with type ascription in where clause
+    triple x = tripleItYo x 
+      where 
+           tripleItYo :: Integer -> Integer 
+           tripleItYo y = y * 3 
+   ```
+    
