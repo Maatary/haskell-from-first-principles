@@ -14,16 +14,16 @@ nonsense :: Bool -> Integer
 nonsense True  = 805
 nonsense False = 31337
 
-curriedFunction :: Integer -> Bool -> Integer
+curriedFunction :: Integer -> Bool -> Integer -- haskell automated currying i.e. the compiler convert it to the `anonNested` form below.
 curriedFunction i b = i + nonsense b
 
-uncurriedFunction :: (Integer, Bool) -> Integer
+uncurriedFunction :: (Integer, Bool) -> Integer  -- manually uncurry the previous function
 uncurriedFunction (i, b) = i + nonsense b
 
-anonymous :: Integer -> Bool -> Integer
+anonymous :: Integer -> Bool -> Integer -- anonymous function leveraging automated haskell currying
 anonymous = \i b -> i + (nonsense b)
 
-anonNested :: Integer -> Bool -> Integer
+anonNested :: Integer -> Bool -> Integer -- manual uncurried. What the compiler does to `curriedFunction` above
 anonNested = \i -> \b -> i + (nonsense b)
 
 curry' :: ((a, b) -> c) -> a -> b -> c
