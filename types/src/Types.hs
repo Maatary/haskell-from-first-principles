@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts #-}
 module Types where
 
 
@@ -93,3 +94,22 @@ p1' x y = y
 -- 1 implementation possible. No the behavior would not change.
 p2 :: a -> b -> b
 p2 x y = y
+  
+
+{- Exercise 4: Infer the type of the function (Answer in the type signature) -}
+myConcat :: [Char] -> [Char]
+myConcat x = x ++ " yo"
+
+myMult :: Fractional a => a -> a
+myMult x = (x / 3) * 5
+
+myTake :: Int -> [Char]
+myTake x = take x "hey you"
+
+myCom :: Int -> Bool
+myCom x = x > (length [1..10])
+
+myAlph :: Char -> Bool
+myAlph x = x < 'z'
+
+

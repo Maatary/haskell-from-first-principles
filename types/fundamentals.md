@@ -283,31 +283,82 @@
    > `id :: a -> a`
 
 
-- **If one applies id to a value of type Int, the a is fixed to type Int.** **By default, type variables are resolved at the left-most part of the type signature** and are fixed once sufficient information to bind them to a concrete type is available.
+ - **If one applies id to a value of type Int, the a is fixed to type Int.** **By default, type variables are resolved at the left-most part of the type signature** and are fixed once sufficient information to bind them to a concrete type is available.
 
 
-- **A function with the type** `id :: a -> a` **cannot do anything other than return** `a`, because there is no information or method attached to its parameter at all—in other words, **since we don’t have any functions that can do anything interesting with a totally generic value, nothing can be done with** `a`. On the other hand, a function like negate, with the similar-appearing type signature of **Num a => a -> a**, constrains the a variable to be an instance of the Num type class. **In this case, `a` has fewer concrete types it could be, but there is a set of methods you can use, a set of things that can be done with a**.
+ - **A function with the type** `id :: a -> a` **cannot do anything other than return** `a`, because there is no information or method attached to its parameter at all—in other words, **since we don’t have any functions that can do anything interesting with a totally generic value, nothing can be done with** `a`. On the other hand, a function like negate, with the similar-appearing type signature of **Num a => a -> a**, constrains the a variable to be an instance of the Num type class. **In this case, `a` has fewer concrete types it could be, but there is a set of methods you can use, a set of things that can be done with a**.
 
 
 
-- **If a variable represents a set of possible values, then a type variable represents a set of possible types**. When there is no type class constraint, the set of possible types a variable could represent is effectively unlimited. **Type class constraints limit the set of potential types (and, thus, potential values) while also passing along the common functions that can be used with those values.**
+ - **If a variable represents a set of possible values, then a type variable represents a set of possible types**. When there is no type class constraint, the set of possible types a variable could represent is effectively unlimited. **Type class constraints limit the set of potential types (and, thus, potential values) while also passing along the common functions that can be used with those values.**
 
 
-- **In sum, if a variable could be anything, then there’s little that can be done to it, because it has no specific methods. If it can be some types (say, a type that has an instance of Num), then it has some methods. If it is a concrete type, you lose the type flexibility but, due to the additive nature of type class inheritance, gain more potential methods.**
+ - **In sum, if a variable could be anything, then there’s little that can be done to it, because it has no specific methods. If it can be some types (say, a type that has an instance of Num), then it has some methods. If it is a concrete type, you lose the type flexibility but, due to the additive nature of type class inheritance, gain more potential methods.**
 
   - E.g. From a function f:: Integer -> Integer, we can use Num or Integral types classes functions in that function, because Integer can be an instance of Integral, and Num, is a SuperClass of Integral.
 
 
-- **A function is polymorphic when its type signature has variables that can represent more than one type.** That is, its parameters are polymorphic. Parametric polymorphism refers to fully polymorphic (unconstrained by a type class) parameters. Parametricity is the property we get from having parametric polymorphism. 
+ - **A function is polymorphic when its type signature has variables that can represent more than one type.** That is, its parameters are polymorphic. Parametric polymorphism refers to fully polymorphic (unconstrained by a type class) parameters. Parametricity is the property we get from having parametric polymorphism. 
 
 
-- **Parametricity means that the behavior of a function with respect to the types of its (parametrically polymorphic) arguments is uniform. The behavior cannot change just because it was applied to an argument of a different type.**
+ - **Parametricity means that the behavior of a function with respect to the types of its (parametrically polymorphic) arguments is uniform. The behavior cannot change just because it was applied to an argument of a different type.**
 
 
+## Polymorphic constants
 
 
+- Until now, we called literal values for numbers, **polymorphic values**, a more accurate term is **polymorphic constants**. 
 
 
+## Working around constraints (or Casting)
 
 
+ - The following expression fails: 
+
+    ```haskell
+    λ> 6 / length [1,2,3]
+    
+    <interactive>:14:1: error:
+        • No instance for (Fractional Int) arising from a use of ‘/’
+        • In the expression: 6 / length [1, 2, 3]
+          In an equation for ‘it’: it = 6 / length [1, 2, 3]
+    ```
+
+ - **The reason for this is that length isn’t polymorphic enough.** The **type class Fractional** includes several types of numbers, but **Int** isn’t one of them, and that’s all length can return.
+ 
+   ```haskell
+   λ> :t (/)
+   (/) :: Fractional a => a -> a -> a -- only takes Fractional
+   λ> :t length 
+   length :: Foldable t => t a -> Int -- only returns Int which does not have any Fractional instance
+     
+   ```
+
+
+ - To solve this kind of issue in haskell we can use function like `fromIntegral`. 
+
+   ```haskell
+   λ> 6 / fromIntegral (length [1,2,3])
+   2.0
+   λ> :t fromIntegral 
+   fromIntegral :: (Integral a, Num b) => a -> b
+   ```
+
+
+## Type Inference
+
+
+ - Haskell does not obligate us to assert a type for every expression or value in our programs, because it has type inference.
+
+
+ - **Haskell will infer the most generally applicable (polymorphic) type that is correct**. 
+
+
+ - Essentially, the compiler starts from the values that have types it knows and then works out the types of the other values.
+
+## Asserting Type Signature
+
+ - **Most of the time, we want to declare our types, rather than relying on type inference.** Adding type signatures to your code can provide guidance to you as you write your functions. **It can also help the compiler give you information about where your code is going wrong.** As programs become longer and more complex, type signatures become even more important, as they help you or other programmers trying to use your code read it and figure out what it’s supposed to do.
+
+ 
 
