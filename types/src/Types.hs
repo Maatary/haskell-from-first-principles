@@ -103,20 +103,33 @@ p2 x y = y
 myConcat :: [Char] -> [Char]
 myConcat x = x ++ " yo"
 
--- Because 3 and 5 are polymorphic constant and (/) is a function  of the Fractional type class 
-myMult :: Fractional a => a -> a 
+-- Because 3 and 5 are polymorphic constant and (/) is a function  of the Fractional type class
+myMult :: Fractional a => a -> a
 myMult x = (x / 3) * 5
 
 -- Because take takes an Int
-myTake :: Int -> [Char] 
+myTake :: Int -> [Char]
 myTake x = take x "hey you"
 
 -- Because length returns Int
-myCom :: Int -> Bool 
+myCom :: Int -> Bool
 myCom x = x > (length [1..10])
 
 -- Because 'z' is the Char
-myAlph :: Char -> Bool 
+myAlph :: Char -> Bool
 myAlph x = x < 'z'
 
 
+{- Exercise 5: Multiple choice -}
+
+-- (1) A Value of type [a] is:
+-- c) a list of elements that are all of some type a
+
+-- (2) A Function of type [[a]] -> [a] is:
+-- (a) takes a list of Strings as argument (but not only, it actually take a list of list as argument)
+
+-- (3) A function [a] -> Int -> a
+-- (b) returns one element of type a from a list (of value of type a)
+
+-- (4) A Function (a, b) -> a
+-- (c) takes a tuple argument and returns the first value
