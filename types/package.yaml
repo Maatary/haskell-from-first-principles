@@ -25,7 +25,7 @@ library:
   source-dirs: src
   when:
     - condition: false
-      other-modules: Paths_basic_types
+      other-modules: Paths_types
 
 
 #executables:
