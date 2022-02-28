@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleContexts #-}
+-- {-# LANGUAGE FlexibleContexts #-}
 module Types where
 
 
@@ -97,19 +97,25 @@ p2 x y = y
   
 
 {- Exercise 4: Infer the type of the function (Answer in the type signature) -}
+
+-- Because " yo" is a [Char]
 myConcat :: [Char] -> [Char]
 myConcat x = x ++ " yo"
 
-myMult :: Fractional a => a -> a
+-- Because 3 and 5 are polymorphic constant and (/) is a function  of the Fractional type class 
+myMult :: Fractional a => a -> a 
 myMult x = (x / 3) * 5
 
-myTake :: Int -> [Char]
+-- Because take takes an Int
+myTake :: Int -> [Char] 
 myTake x = take x "hey you"
 
-myCom :: Int -> Bool
+-- Because length returns Int
+myCom :: Int -> Bool 
 myCom x = x > (length [1..10])
 
-myAlph :: Char -> Bool
+-- Because 'z' is the Char
+myAlph :: Char -> Bool 
 myAlph x = x < 'z'
 
 
