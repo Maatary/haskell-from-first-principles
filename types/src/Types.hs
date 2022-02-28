@@ -1,4 +1,5 @@
 -- {-# LANGUAGE FlexibleContexts #-}
+-- {-# LANGUAGE NoMonomorphismRestriction #-}
 module Types where
 
 

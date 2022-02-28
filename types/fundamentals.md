@@ -376,11 +376,23 @@
     λ> :t triple 
     triple :: Integer -> Integer 
     ```
-   ```haskell
-    --(2) coerce the type inference with type ascription in where clause
-    triple x = tripleItYo x 
-      where 
-           tripleItYo :: Integer -> Integer 
-           tripleItYo y = y * 3 
-   ```
-    
+    ```haskell
+     --(2) coerce the type inference with type ascription in where clause
+     triple x = tripleItYo x 
+       where 
+            tripleItYo :: Integer -> Integer 
+            tripleItYo y = y * 3 
+    ```
+ 
+
+
+
+## Language Pragma
+
+  - By default, when writing a module, **monomorphism restriction** applies. This means, haskell will try to default to the most concrete types, rather than the most polymorphic type applicable. More specifically, _top-level declarations by default will have a concrete type if any can be determined_.
+
+  - In order to remove that restriction and have haskell infer the most polymorphic type applicable, a specific language pragma must be used, and place at the very to of the file, namely:
+
+    ```haskell
+    {-# LANGUAGE NoMonomorphismRestriction #-}
+    ```
