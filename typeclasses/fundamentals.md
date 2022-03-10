@@ -29,6 +29,32 @@
  - **When you use a type class method with one of the types that has such an instance, the compiler looks up the code that dictates how the function works for that type**.
 
 
+## Checking what Types Classes does a Type Implements
+
+
+ - Simply type `:info` followed by the type
+
+    ```haskell
+    λ> :info Bool  
+    type Bool :: *     
+    data Bool = False | True     
+            -- Defined in ‘ghc-prim-0.6.1:GHC.Types’     
+    instance Eq Bool -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’  
+    instance Ord Bool -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’  
+    instance Enum Bool -- Defined in ‘GHC.Enum’   
+    instance Show Bool -- Defined in ‘GHC.Show’   
+    instance Read Bool -- Defined in ‘GHC.Read’   
+    instance Bounded Bool -- Defined in ‘GHC.Enum’   
+    ```
+ 
+ - The information includes the data declaration for Bool and which type classes it already has instances of. It also tells where the datatype and its instances are defined for the compiler.
+
+
+ - **Each instance represents a type class that Bool implements**
+
+
+ - **The instances are the unique specifications** of how Bool makes use of the methods from that type class.
+
 
 
 
