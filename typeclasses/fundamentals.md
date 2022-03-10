@@ -56,6 +56,37 @@
  - **The instances are the unique specifications** of how Bool makes use of the methods from that type class.
 
 
+## Eq Type Class
+
+ - In Haskell, equality is implemented with a type class called Eq. 
+
+ - Some programming languages bake equality into every object in the language, but some datatypes do not have a sensible notion of equality, so Haskell does not encode equality into every type. 
+ 
+
+ - Eq is defined this way:
+
+    ```haskell
+    λ> :i Eq
+    type Eq :: * -> Constraint
+    class Eq a where
+      (==) :: a -> a -> Bool
+      (/=) :: a -> a -> Bool
+      {-# MINIMAL (==) | (/=) #-}
+            -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq a => Eq [a] -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq Word -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq Ordering -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq Int -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq Float -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq Double -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq Char -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance Eq Bool -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    ```
+
+ - GHCi tells us we have a type class called **Eq** that specifies **two basic functions, equality and non-equality**, **and gives their type signatures**. Next, it prints out all the instances of Eq that it knows about.
+
+
+ - 
 
 
 
