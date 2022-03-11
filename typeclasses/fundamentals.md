@@ -86,7 +86,21 @@
  - GHCi tells us we have a type class called **Eq** that specifies **two basic functions, equality and non-equality**, **and gives their type signatures**. Next, it prints out all the instances of Eq that it knows about.
 
 
- - 
+ - **Any type that has an instance of this type class must implement the methods of Eq.**
+
+ - **The types of** `==` and `/=` in `Eq` tell us something important about these functions: 
+
+   > `(==) :: Eq a => a -> a -> Bool`  
+   > `(/=) :: Eq a => a -> a -> Bool`  
+
+
+ - Given these types, we know that they can be used for any type `a` that implements the `Eq` type class. 
+
+
+ - We also know that both functions **will take two arguments of the same type `a` and return a value of type Bool**. We know they have to be the same because `a` must equal `a` in the same type signature.
+
+
+ 
 
 
 
