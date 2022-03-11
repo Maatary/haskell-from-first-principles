@@ -1,3 +1,4 @@
+{-#LANGUAGE NoMonomorphismRestriction#-}
 module Lib
     ( someFunc
     ) where
@@ -5,5 +6,16 @@ module Lib
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
+
 x :: Bool
-x = True
+x = True == False 
+
+list :: [Int] 
+list = [1]
+
+
+test :: (Eq a, Num a) => a -> Bool
+test = (==) 2
+
+test2 :: Bool
+test2 = (1,2) == (1,2)
