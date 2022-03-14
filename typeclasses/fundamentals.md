@@ -55,6 +55,21 @@
 
  - **The instances are the unique specifications** of how Bool makes use of the methods from that type class.
 
+## A Nod at Type Classes Hierarchy
+
+ - Type classes have a hierarchy of sorts, as seen in the previous chapters on numeric types. All Fractional numbers implement the Num type class, but not all members of Num are Fractional. All members of Ord must be members of Eq, and all members of Enum must be members of Ord. To be able to put things into an enumerated list, they must be orderable; to be orderable, they must be able to be compared for equality.
+
+
+ - This is reflected in the Type Classes declaration we have seen in the previous chapters:  
+ 
+    ```haskell
+    λ> :i Fractional
+    type Fractional :: * -> Constraint
+    class Num a => Fractional a where
+      (/) :: a -> a -> a
+    ```
+ 
+ - More specifically `class Num a => Fractional a where` means `class Fractional a` requires `Num a`. 
 
 ## Eq Type Class
 
@@ -100,14 +115,53 @@
  - We also know that both functions **will take two arguments of the same type `a` and return a value of type Bool**. We know they have to be the same because `a` must equal `a` in the same type signature.
 
 
+ - The signature of a function defined inside a type class, as in 
+
+   ```haskell
+   class Eq a where 
+     (==) :: a -> a -> Bool -- abbreviated form
+     (/=) :: a -> a -> Bool -- abbreviated form
+   ```
  
+   can be understood as its abbreviated form. The full form would be: 
+
+    ```haskell
+    (==) :: Eq a => a -> a -> Bool -- full form as return by :t (=)
+    (/=) :: Eq a => a -> a -> Bool -- full form as return by :t (/=)
+    ```
 
 
+## A Glimpse at Type Classes Derivation
+
+ - **Type classes Derivation** is the idea that to obtain the Type Class Instance of a Type A, we need the Type Class Instance of a Type B, that the Type A is _based on_. 
 
 
+ - We can think of it as Instance constraint, similar to the Type Class Constraint in Type Class Definition which gives rise to Type Classes hierarchy. 
 
 
+ - The Tuple Type is a good example for this:
 
+    ```haskell
+    λ> :i Eq
+    type Eq :: * -> Constraint
+    class Eq a where
+      (==) :: a -> a -> Bool
+      (/=) :: a -> a -> Bool
+      {-# MINIMAL (==) | (/=) #-}
+            -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+    instance (Eq a, Eq b) => Eq (a, b)
+            -- Defined in ‘ghc-prim-0.6.1:GHC.Classes’
+   ```
+
+
+ - `instance (Eq a, Eq b) => Eq (a, b)` means `instance Eq (a, b)` requires `Eq a` and
+   `Eq b`. That is, that `a` implements `Eq` and that `b` implements `Eq` or in other words, there exist an `instance Eq a` and an `instance Eq b`.
+
+
+ - This is indeed similar to Type Class hierarchy `class Num a => Fractional a where` which means the `class Fractional a` requires `Num a`. 
+
+
+ - The difference however is that, _in Type Class hierarchy, a type requires an instance_, while _in Type Class derivation, an instance requires an instance_. 
 
 
 
