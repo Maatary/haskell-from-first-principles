@@ -50,7 +50,7 @@
    >
    > Here `Dog :: Name -> Pet` really highlight what is meant by the type of the **Data Constructor**.  
    > It is not to be confused with the type of the value being constructed out of the **Data Constructor**.  
-   > It _coincides_ when the **Data Constructor** is **nullary** i.e. a **constant value** which is a **constant function**.  
+   > The Data constructor and the value that it produces _coincides_ when the **Data Constructor** is **nullary** i.e. a **constant value** which is a **constant function**.  
    >   
    > **The Data Constructor type is a function type.**
    > **In other words when the Data Constructor is applied you get a value of the Type of which the Data Constructor is part of the declaration of.**
@@ -218,7 +218,7 @@
 
 
 
-- **Tuples in Haskell** are the usual means of briefly carrying around multiple values without giving that combination its own name. That is, is allows to store and pass around multiple values within a single, composite value, where the type of that value is tuple rather than a user define type. 
+- **Tuples in Haskell** are the usual means of briefly carrying around multiple values without giving that combination its own name. That is, it allows to store and pass around multiple values within a single, composite value, where the type of that value is tuple rather than a user define type. 
 
 
 - **A tuple** is an ordered grouping of values. 
@@ -242,7 +242,7 @@
 - **The type Constructor of Tuple `(,) a b`** has two parameters, represented by the **type variables** **a** and **b**. Those have to be applied to concrete types, much as variables at the term level have to be applied to values in order to evaluate a function. It is a *parameterized type constructor*, as opposed to a *type constant* such as Bool. That is, the **type variables** makes it a polymorphic type constructor, or polymorphic type in short. In other words, the **Tuple Type** give rise to multiple concrete type upon application. e.g. `(String, String)` or `(String, Int)` are concrete Tuple Type. 
 
 
-- **The Data Constructor of Tuple `(,) a b`** has two parameters, represented by **the variables of type a and b**. That is, this is the term level. In other worlds, when a Data constructor is Parameterized, the Parameters are Values of which the types is provided as Parameters. 
+- **The Data Constructor of Tuple `(,) a b`** has two parameters, represented by **the variables of type a and b**. That is, this is the term level. In other worlds, when a Data constructor is Parameterized, the Parameters are Values of which the types is provided as Parameters***(not that accurate). 
 
 
 - **Where the Type constructor is applied to Types (i.e. a and b), the Data Constructor is applied to Values of type a and b.** **The types of those values are the parameters of the Data Constructor**. Here, the first one has **type a**, so it's just a **value** of the **parameter type a** introduced in the type Constructor.
