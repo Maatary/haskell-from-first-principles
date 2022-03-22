@@ -55,7 +55,8 @@
 
  - **The instances are the unique specifications** of how Bool makes use of the methods from that type class.
 
-## A Nod at Type Classes Hierarchy
+
+## Quick Note on Type Classes Hierarchy
 
  - Type classes have a hierarchy of sorts, as seen in the previous chapters on numeric types. All Fractional numbers implement the Num type class, but not all members of Num are Fractional. All members of Ord must be members of Eq, and all members of Enum must be members of Ord. To be able to put things into an enumerated list, they must be orderable; to be orderable, they must be able to be compared for equality.
 
@@ -164,5 +165,63 @@
  - The difference however is that, _in Type Class hierarchy, a type requires an instance_, while _in Type Class derivation, an instance requires an instance_. 
 
 
+ - `instance Eq (a, b)` should be red as for all type a and b Eq of the type Tuple a b i.e. In fact the full form is `instance forall a b. Eq (a, b)`.  
+
+
  - **Type class deriving**: Type class instances we can derive magically include Eq, Ord, Enum, Bounded, Read, and Show, although there are some constraints on deriving a few of these. Deriving means you don’t have to manually write instances of these type classes for each new datatype you create. This will be addressed in Chapter 11, on algebraic datatypes.
  
+
+
+## A Deeper Understanding of Type class
+
+### Meaning
+
+ - **Type Class** is shorthand for _**Class of Types**_, hence **the Instance is a Type**. That is, **defining a Type Class Instance is defining a Type**. However, **a Type of Kind Constraint**. We can see that if we inspect the **kind** of an Instance. 
+
+     ```haskell
+     λ> :k (Eq Integer)
+     (Eq Integer) :: Constraint
+     ```
+
+
+ - **Defining a Type Class**, is like a **data declaration** that involve the definition a Type constructor (**i.e. a Type function**). We can see that if we look at the **kind** of the Type Class itself. For `Eq` it is a type function that take a proper type i.e. `*` (a type of kind TYPE) and returns a Constraint(a type of Kind Constraint). 
+
+    ```haskell
+    λ> :k Eq 
+    Eq :: * -> Constraint
+    ```
+
+
+ - For a lack of better words, we will say that a Type Class definition involve **the definition of a Constraint Constructor**. 
+
+
+ - **Type Constructor and Constraint Constructor are similar** in that both need to be **applied** to build a Proper Type (*) or Constraint.  Their difference semantically other than syntactically, is that there are of different Kind e.g. `* -> *`  **vs** `* -> Constraint`. **That is, both are Type function, but they build type of different Kind**
+
+ - Another way to better understand the similarity between **Type Class definition** and **Data definition** is to look at **Data definition** with **GADTSyntax** enabled.
+
+
+### Universal Quantification
+
+- A Polymorphic Type is a type that may have multiple form. A Type that may have multiple form is empty, meaning it has only "one value" e.g. empty/bottom.
+
+
+- When folks talk about polymorphic type in haskell they usually mean/talk about Parameterized type.
+
+
+- It is signature that have polymorphic type variable, or said differently it is the type expressions (for function i.e. signature) that can be polymorphic.
+
+- Check scala 3 type lambda
+
+### Scala Perspective 
+
+ - Taken from scala perspective `instance for all a. Eq a` or for short `instance Eq a` does two things _(leaving the universal quantification out of the picture for simplification)_, it creates the proper type `trait Eq[*]` and a value of type `trait Eq[*]` that contains the method for implemented for `*`. (TODO)
+
+
+
+
+
+
+
+
+
+
