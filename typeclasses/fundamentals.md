@@ -192,7 +192,7 @@
     ```
 
 
- - For a lack of better words, we will say that a Type Class definition involve **the definition of a Constraint Constructor**. 
+ - For a lack of better words, we will say that a **Type Class definition** involve **the definition of a Constraint Constructor**. 
 
 
  - **Type Constructor and Constraint Constructor are similar** in that both need to be **applied** to build a Proper Type (*) or Constraint.  Their difference semantically other than syntactically, is that there are of different Kind e.g. `* -> *`  **vs** `* -> Constraint`. **That is, both are Type function, but they build type of different Kind**
@@ -201,6 +201,8 @@
 
 
 ### Universal Quantification
+
+
 
 - A Polymorphic Type is a type that may have multiple form. A Type that may have multiple form is empty, meaning it has only "one value" e.g. empty/bottom.
 
