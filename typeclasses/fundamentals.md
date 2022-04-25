@@ -165,10 +165,10 @@
  - The difference however is that, _in Type Class hierarchy, a type requires an instance_, while _in Type Class derivation, an instance requires an instance_. 
 
 
- - `instance Eq (a, b)` should be red as for all type `a` and `b`, Eq for the type `(a, b)`. In fact the full form is `instance forall a b. Eq (a, b)`. That is, we define `Eq` for the _concrete type_ `(a, b)` for all possible type `a` and `b`. We are not defining Eq for the type constructor `(,)`. This distinction is quite important and related to universal quantification in Haskell. The section [a deeper understanding of type Classes](/typeclasses/fundamentals.md#a-deeper-understanding-of-type-classes)
+ - `instance Eq (a, b)` should be red as for all type `a` and `b`, Eq for the type `(a, b)`. In fact, the full form is `instance forall a b. Eq (a, b)`. That is, we define `Eq` for the _concrete type_ `(a, b)` for all possible type `a` and `b`. It is important to note that, we are not defining `Eq` for the type constructor `(,)` but for a concrete type (i.e. **proper type**) `(a, b)`. This distinction is quite important and related to **Universal Quantification**, and **Kinds of Type** in Haskell. The section [a deeper understanding of type Classes](/typeclasses/fundamentals.md#a-deeper-understanding-of-type-classes) dwelve deeply into this.
 
 
- - **Type class deriving**: Type class instances we can derive magically include Eq, Ord, Enum, Bounded, Read, and Show, although there are some constraints on deriving a few of these. Deriving means you don’t have to manually write instances of these type classes for each new datatype you create. This will be addressed in Chapter 11, on algebraic datatypes.
+ - **Automated Type class deriving:** Type class instances we can derive magically include Eq, Ord, Enum, Bounded, Read, and Show, although there are some constraints on deriving a few of these. Deriving means you don’t have to manually write instances of these type classes for each new datatype you create. This will be addressed in Chapter 11, on algebraic datatypes.
  
 
 
@@ -183,8 +183,12 @@
      (Eq Integer) :: Constraint
      ```
 
+   - Thinking with types - _Terms, Types and Kinds_ - _Constraints and GADT_
+   - https://kseo.github.io/posts/2017-01-13-constraint-kinds.html
+   
 
- - **Defining a Type Class**, is like a **data declaration** that involve the definition a Type constructor (**i.e. a Type function**). We can see that if we look at the **kind** of the Type Class itself. For `Eq` it is a type function that take a proper type i.e. `*` (a type of kind TYPE) and returns a Constraint(a type of Kind Constraint). 
+
+ - **Defining a Type Class**, is like a **data declaration** that involve the definition a Type constructor (**i.e. a Type function**). We can see that if we look at the **kind** of the Type Class itself. For `Eq` it is a type function that take a proper type i.e. `*` (a type of kind TYPE) and returns a Constraint (a type of Kind Constraint). 
 
     ```haskell
     λ> :k Eq 
@@ -197,23 +201,26 @@
 
  - **Type Constructor and Constraint Constructor are similar** in that both need to be **applied** to build a Proper Type (*) or Constraint.  Their difference semantically other than syntactically, is that there are of different Kind e.g. `* -> *`  **vs** `* -> Constraint`. **That is, both are Type function, but they build type of different Kind**
 
+
  - Another way to better understand the similarity between **Type Class definition** and **Data definition** is to look at **Data definition** with **GADTSyntax** enabled.
 
 
-### Understanding Instance Declaration for Polymorphic Type.
+
 
 
 ### Universal Quantification
 
- - Explain how Polymorphism in haskell work. We need reference to the Hinlder-Mindley system and System F.
+ - The key to understand universal quantification in haskell, is to deeply understand how polymorphism is implemented in a typed lambda calculus which is the operational semantic of Haskell. In particular, it is important to understand the flavor of haskell which is the hindler-Mindley system on surface but formally grounded in the System-F. 
+
+   - _Types and Programing Languages - Part IV - Polymorphism - Chapter 23 - Universal Types_
+   
+   - _Type System for Programing language - Chapter 4 - Polymorphism and system F_
    
    - [A Deep explanation of - forall a. a ( e.g. forall a. Maybe a)  - type of signature](https://stackoverflow.com/questions/3961851/what-is-the-difference-between-forall-a-a-and-forall-a-a)
 
    - [A deep introduction on how haskell implement polymorphism based on the Hindley-Milner system and System-F](https://stackoverflow.com/questions/57085678/which-is-a-polymorphic-type-a-type-or-a-set-of-types)
    
-   - _Types and Programing Languages - Part IV - Polymorphism - Chapter 23 - Universal Types_ 
    
-   - _Type System for Programing language - Chapter 4 - Polymorphism and system F_
    
     
  - Using the extension `-XTypeApplications` we can experience in practice the implicit full signature of polymorphic function, and apply the type ourself, the same way GHC would do when we pass an argument. 
@@ -257,24 +264,35 @@
    > We know nothing about `a`, it is a type variable, so if anything, we know it represents all possible type, and what is a possible value for all possible type i.e. is a value that is of all possible type  ? 
    > 
    > **There is none, it is "Undefined"**.
- 
-
- ### Data declaration & GADT Syntax
 
 
+ - **Not Good At all:** A Polymorphic Type is a type that may have multiple form. A Type that may have multiple form is empty, meaning it has only "one value" e.g. empty/bottom. See Haskell in depth for an additional example of _Polymorphic Type_ use and enablement.
+
+
+ - When folks talk about polymorphic type in haskell they usually mean/talk about Parameterized type.
+
+
+ - It is signatures that have polymorphic type variable, or said differently it is the type expressions (for function i.e. signature) that can be polymorphic.
+
+ - Check scala 3 type lambda
+
+### Data declaration with Record Syntax
+
+
+
+### Data declaration with GADT Syntax
 
 
 
 
- - **Not Good At all:** A Polymorphic Type is a type that may have multiple form. A Type that may have multiple form is empty, meaning it has only "one value" e.g. empty/bottom.
 
 
-- When folks talk about polymorphic type in haskell they usually mean/talk about Parameterized type.
+### Data declaration with GADT Syntax & Record Syntax Combined
 
 
-- It is signatures that have polymorphic type variable, or said differently it is the type expressions (for function i.e. signature) that can be polymorphic.
+### Understanding Polymorphic Instance Declaration.
 
-- Check scala 3 type lambda
+
 
 ### Scala Perspective 
 
