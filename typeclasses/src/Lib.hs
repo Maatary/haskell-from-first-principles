@@ -1,7 +1,6 @@
 {-# LANGUAGE NoMonomorphismRestriction#-}
 {-# LANGUAGE ExplicitForAll #-}
 {-# LANGUAGE TypeApplications #-}
-
 {-# LANGUAGE GADTSyntax #-}
 
 module Lib where
@@ -16,14 +15,14 @@ list = [undefined]
 -- GADTSyntax i.e. data Me a = Me a
 data Me a where
   Me :: forall e. e -> Me e
+  deriving Show
 
 
-
--- Interesting that  when you put a constraint it works
+-- This works because Num a => has all the numeric literals has inhabitant.
 me :: forall a.  Num a => Me a
 me = Me 2
 
--- Does not work
+-- Does not work, because we know nothing about a. Compared to the above, Eq a => give you no about a.
 --mea ::  Eq a  => Me a
 --mea = Me '2' 
   
@@ -40,10 +39,14 @@ record :: forall a. Record a
 record = Record { idx = \x -> x }
 
 use :: a -> a
-use  = idx record 
+use  = idx record -- field selection in GADT syntax
 
 
+listFunA :: forall a. [a -> a]
+listFunA = [\x -> x]
 
+aFun :: forall a. a -> a
+aFun = id
 -- Example of GADTSyntax
 
 data Maybe' a where
@@ -102,7 +105,8 @@ myId x y = x-}
 -- This is RankNTypes Stuff and is useless
 {-
 f :: (forall a. [a]) -> (forall a. [a])
-f l = l-}
+f l = l
+-}
 
 -- For accessing GHC Core translation
 {-

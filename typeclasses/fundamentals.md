@@ -56,9 +56,9 @@
  - **The instances are the unique specifications** of how Bool makes use of the methods from that type class.
 
 
-## Quick Note on Type Classes Hierarchy
+## Quick Note On Type Classes Hierarchy
 
- - Type classes have a hierarchy of sorts, as seen in the previous chapters on numeric types. All Fractional numbers implement the Num type class, but not all members of Num are Fractional. All members of Ord must be members of Eq, and all members of Enum must be members of Ord. To be able to put things into an enumerated list, they must be orderable; to be orderable, they must be able to be compared for equality.
+ - Type classes have a hierarchy of sorts, as seen in the previous chapters on [numeric types](/basic-datatypes/fundamentals.md#numeric-datatypes). All Fractional numbers implement the Num type class, but not all members of Num are Fractional. All members of Ord must be members of Eq, and all members of Enum must be members of Ord. To be able to put things into an enumerated list, they must be orderable; to be orderable, they must be able to be compared for equality.
 
 
  - This is reflected in the Type Classes declaration we have seen in the previous chapters:  
@@ -124,7 +124,7 @@
      (/=) :: a -> a -> Bool -- abbreviated form
    ```
  
-   can be understood as its abbreviated form. The full form would be: 
+   can be understood as its abbreviated form*. The full form* would be: 
 
     ```haskell
     (==) :: Eq a => a -> a -> Bool -- full form as return by :t (=)
@@ -165,16 +165,16 @@
  - The difference however is that, _in Type Class hierarchy, a type requires an instance_, while _in Type Class derivation, an instance requires an instance_. 
 
 
- - `instance Eq (a, b)` should be red as for all type a and b Eq of the type Tuple a b i.e. In fact the full form is `instance forall a b. Eq (a, b)`.  
+ - `instance Eq (a, b)` should be red as for all type `a` and `b`, Eq for the type `(a, b)`. In fact the full form is `instance forall a b. Eq (a, b)`. That is, we define `Eq` for the _concrete type_ `(a, b)` for all possible type `a` and `b`. We are not defining Eq for the type constructor `(,)`. This distinction is quite important and related to universal quantification in Haskell. The section [a deeper understanding of type Classes](/typesclasses/fundamentals.md#a-deeper-understanding-of-type-classes)
 
 
  - **Type class deriving**: Type class instances we can derive magically include Eq, Ord, Enum, Bounded, Read, and Show, although there are some constraints on deriving a few of these. Deriving means you don’t have to manually write instances of these type classes for each new datatype you create. This will be addressed in Chapter 11, on algebraic datatypes.
  
 
 
-## A Deeper Understanding of Type class
+## A Deeper Understanding of Type classes
 
-### Meaning
+### General Meaning
 
  - **Type Class** is shorthand for _**Class of Types**_, hence **the Instance is a Type**. That is, **defining a Type Class Instance is defining a Type**. However, **a Type of Kind Constraint**. We can see that if we inspect the **kind** of an Instance. 
 
@@ -200,17 +200,79 @@
  - Another way to better understand the similarity between **Type Class definition** and **Data definition** is to look at **Data definition** with **GADTSyntax** enabled.
 
 
+### Understanding Instance Declaration for Polymorphic Type.
+
+
 ### Universal Quantification
 
+ - Explain how Polymorphism in haskell work. We need reference to the Hinlder-Mindley system and System F.
+   
+   - [A Deep explanation of - forall a. a ( e.g. forall a. Maybe a)  - type of signature](https://stackoverflow.com/questions/3961851/what-is-the-difference-between-forall-a-a-and-forall-a-a)
+
+   - [A deep introduction on how haskell implement polymorphism based on the Hindley-Milner system and System-F](https://stackoverflow.com/questions/57085678/which-is-a-polymorphic-type-a-type-or-a-set-of-types)
+   
+   - _Types and Programing Languages - Part IV - Polymorphism - Chapter 23 - Universal Types_ 
+   
+   - _Type System for Programing language - Chapter 4 - Polymorphism and system F_
+   
+    
+ - Using the extension `-XTypeApplications` we can experience in practice the implicit full signature of polymorphic function, and apply the type ourself, the same way GHC would do when we pass an argument. 
+
+    ```haskell
+    -- :set -XExplicitForAll
+    -- :set -fprint-explicit-foralls
+    -- :set -XTypeApplications --Only works when the type signature is defined explicitly.
+    ```
+
+ - The case of Polymorphic Un-Inhabited Type 
+
+   > The signature
+   > 
+   > `∀a. a -> b`
+   > 
+   > has term value
+   > 
+   > `Λa.λ(x:a).x`
+   > 
+   > or writtern in a more haskell style
+   > 
+   > `/\(a :: Type) -> \(x :: a) -> x` a.k.a 
+   > 
+   > i.e.
+   > 
+   > `forall (a: Type) -> -> \(x :: a) -> x`
+ 
+   However  
+
+   > The signature
+   > 
+   > ` ∀a. a`
+   > 
+   > does not yield any term. 
+   > 
+   > Indeed, if `∀a.` yield the term `Λa.t` i.e `/\(a: Type) ->`  i.e. a type abstraction term. 
+   > 
+   > What would be a value for `a` i.e. `/\(a :: Type) -> ??? ` 
+   > 
+   > We know nothing about `a`, it is a type variable, so if anything, we know it represents all possible type, and what is a possible value for all possible type i.e. is a value that is of all possible type  ? 
+   > 
+   > **There is none, it is "Undefined"**.
+ 
+
+ ### Data declaration & GADT Syntax
 
 
-- A Polymorphic Type is a type that may have multiple form. A Type that may have multiple form is empty, meaning it has only "one value" e.g. empty/bottom.
+
+
+
+
+ - **Not Good At all:** A Polymorphic Type is a type that may have multiple form. A Type that may have multiple form is empty, meaning it has only "one value" e.g. empty/bottom.
 
 
 - When folks talk about polymorphic type in haskell they usually mean/talk about Parameterized type.
 
 
-- It is signature that have polymorphic type variable, or said differently it is the type expressions (for function i.e. signature) that can be polymorphic.
+- It is signatures that have polymorphic type variable, or said differently it is the type expressions (for function i.e. signature) that can be polymorphic.
 
 - Check scala 3 type lambda
 
