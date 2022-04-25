@@ -165,7 +165,7 @@
  - The difference however is that, _in Type Class hierarchy, a type requires an instance_, while _in Type Class derivation, an instance requires an instance_. 
 
 
- - `instance Eq (a, b)` should be red as for all type `a` and `b`, Eq for the type `(a, b)`. In fact the full form is `instance forall a b. Eq (a, b)`. That is, we define `Eq` for the _concrete type_ `(a, b)` for all possible type `a` and `b`. We are not defining Eq for the type constructor `(,)`. This distinction is quite important and related to universal quantification in Haskell. The section [a deeper understanding of type Classes](/typesclasses/fundamentals.md#a-deeper-understanding-of-type-classes)
+ - `instance Eq (a, b)` should be red as for all type `a` and `b`, Eq for the type `(a, b)`. In fact the full form is `instance forall a b. Eq (a, b)`. That is, we define `Eq` for the _concrete type_ `(a, b)` for all possible type `a` and `b`. We are not defining Eq for the type constructor `(,)`. This distinction is quite important and related to universal quantification in Haskell. The section [a deeper understanding of type Classes](/typesclasses/fundamentals.md##a-deeper-understanding-of-type-classes)
 
 
  - **Type class deriving**: Type class instances we can derive magically include Eq, Ord, Enum, Bounded, Read, and Show, although there are some constraints on deriving a few of these. Deriving means you don’t have to manually write instances of these type classes for each new datatype you create. This will be addressed in Chapter 11, on algebraic datatypes.
