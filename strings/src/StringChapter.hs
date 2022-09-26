@@ -62,6 +62,7 @@ takeDrop :: Int -> Int -> [a] -> [a]
 takeDrop t d = drop d . take t
 
 -- The function expect as input "Curry is awesome"
+rvrs :: [Char]
 rvrs  =
   let
     curryIsAwesome = "Curry is awesome"
