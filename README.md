@@ -235,5 +235,6 @@ Hence, in order to understand how to work with it, we use this readme opportunit
 
 ## Haskell Project Development: A Deep Dive into Haskell Compilation, Dependency Management and The Packaging System & Tooling
 
-
  [[TODO]]
+ 
+ - [Haskell Compilation and Package System Fundamentals](https://github.com/Maatary/haskell-no-project)
