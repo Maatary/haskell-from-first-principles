@@ -1,7 +1,10 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Redundant section" #-}
-module Learn( ) where
+module Learn where -- () this means export nothing
 
+main :: IO ()
+main = putStrLn "hello world"
+  
 sayHello ::  String -> IO ()
 sayHello x = 
   putStrLn ("Hello, " ++ x ++ "!")
@@ -17,7 +20,7 @@ myPi x = 3.14 * x^2
 
 aPi x = pi * x ^ 2
 
-{- Infix function i.e. Operator and PreFix Function in Infix Position -}
+{- Infix function i.e. Operator and Prefix Function in Infix Position -}
 functionInInfix = 10 `div` 4
 
 normalFunction  = div 10 4

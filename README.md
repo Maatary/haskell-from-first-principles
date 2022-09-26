@@ -1,14 +1,18 @@
 # Haskell-From-First-Principles
 
+## Overview
+
 This is my companion project to the book **haskell from first principles** that capture my learning journey.
 It is organized as a multi-package haskell project.
 
 Hence, in order to understand how to work with it, we use this readme opportunity to capture and introduce the knowledge related to how project/program are structure in haskell as well as the build tools used to manage and compile them.
 
+## Haskell Stack Installation & Management
+
+[[TODO]]
 
 
-
-## Understanding Haskell Program Structure: Module, Package, Project
+## An Introduction to Haskell Program Structure: Module, Package, Project
 
 ### Overview
 
@@ -137,6 +141,8 @@ Hence, in order to understand how to work with it, we use this readme opportunit
   
   - A module name or its synonym prefixed with the module keyword for exporting all names imported from the corresponding module, or the namespace identified by the synonym. (**_ this kind of export is called reexporting._**)
 
+  - **Note that instances of type class are always exported.**
+
     ```haskell
       module ModuleName (
         module X,                            ❶
@@ -158,9 +164,6 @@ Hence, in order to understand how to work with it, we use this readme opportunit
     ❸ Exports the type constructor with all data constructors
     
     ❹ Exports the type constructor with the two mentioned data constructors
-
-
-
 
 
 
@@ -219,3 +222,18 @@ Hence, in order to understand how to work with it, we use this readme opportunit
 
   - **Tutorial** for examples of how to use the corresponding library, such as Control.Proxy.Tutorial from the pipes library
 
+
+## Working with the Project
+
+### Project Structure
+
+ [[TODO]]
+
+### First Steps
+
+ [[TODO]]
+
+## Haskell Project Development: A Deep Dive into Haskell Compilation, Dependency Management and The Packaging System & Tooling
+
+
+ [[TODO]]
