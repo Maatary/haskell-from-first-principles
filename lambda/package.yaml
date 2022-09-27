@@ -8,6 +8,7 @@ copyright:           "2022 Maatary Okouya"
 
 extra-source-files:
 - '*.md'
+- 'assets/*.png'
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
