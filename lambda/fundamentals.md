@@ -56,6 +56,18 @@ The lambda calculus has three basic components, or _lambda terms_: expressions, 
 - When we apply the abstraction to arguments, we replace the names with values, making it concrete.
 
 
+
+![Lambda-Structure](assets/lambda-structure.png)
+
+
+ - In an expression like `λx.x`, the variable `x` **here is not semantically meaningful except in its role in that single expression**. Because of this, there's a form of **equivalence** between lambda terms called **alpha equivalence**. This is a way of saying that the following expressions all mean the same thing:
+
+    > λx.x
+    > λd.d
+    > λz.z 
+
+
+
 ## Beta Reduction
 
 - When we apply a function to an argument, we substitute the input expression for all instances of bound variables within the body of the abstraction. You also eliminate the head of the abstraction, since its only purpose is to bind a variable. This process is called _beta reduction_.
@@ -85,6 +97,14 @@ The lambda calculus has three basic components, or _lambda terms_: expressions, 
 - Sometimes, the body expression has variables that are not named in the head. We call those variables free variables.
 
   > `λx.xy`
+
+ - **A computation consists** of an **initial lambda expression** plus **a finite sequence of lambda terms, each deduced from the preceding term by one application of beta reduction**. We keep following the rules of application, **substituting arguments for bound variables** until there are no more heads left to evaluate or **no more arguments to apply them to**.
+
+ - It’s more common in academic lambda calculus materials **to refer to abstract variables rather than concrete values**. The process of beta reduction is the same, regardless. The lambda calculus is a process or method, like a game with a few simple rules for transforming lambdas but **no specific meaning**.
+
+
+
+
 
 
 ## Multiple arguments
@@ -155,9 +175,6 @@ Applying the first lambda to the argument give us back the same expression.
 - **_A lambda abstraction_** is an **anonymous function** or lambda term e.g. `(λx.x + 1)` .The head of the expression, `λx.`, abstracts out the term `x + 1`.
 
 
-- **_In functional Programing_** all functions take one argument and return one result.
-
-
 - **_Application_** is how one evaluates or reduces lambdas, binding the parameter to the concrete argument.
 
 
@@ -165,6 +182,19 @@ Applying the first lambda to the argument give us back the same expression.
 
 
 - **_Lambda calculus_** is a formal system for expressing programs in terms of abstraction and application.
+
+
+- **_Functional programming_** is based on expressions that include variables or constant values, expressions combined with other expressions, and functions.
+
+- **_Functions_** have a head and a body and are those expressions that can be applied to arguments and reduced, or evaluated, to a final result.
+
+- **_Variables_** may be bound in the function declaration, and every time a bound variable shows up in a function, it has the same value. 
+
+- **_All functions_** take one argument and return one result.
+
+
+
+
 
  
 
