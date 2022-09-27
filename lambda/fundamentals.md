@@ -172,7 +172,7 @@ Applying the first lambda to the argument give us back the same expression.
 
 ### Overview
 
-The following are extra materials taken from the book _Types and Programing Languages - Part I - Untyped System - Chapter 5 - The Untyped Lambda-Calculus_
+The following are extra materials taken from the book **Types and Programing Languages - Part I - Untyped System - Chapter 5 - The Untyped Lambda-Calculus**
 
 ### Definitions
 
@@ -192,37 +192,37 @@ The following are extra materials taken from the book _Types and Programing Lang
 
 
 
-- In the lambda-calculus everything is a function: the arguments accepted by functions are themselves functions and the result returned by a function is another function.
+- In the **lambda-calculus** **everything is a function**: the arguments accepted by functions are themselves functions and the result returned by a function is another function.
 
 
-- Note that a constant `y` or a constant function that always return `y` would be written `λx.y`. That is, for ay input we always get y. But there is more to add constant to Lambda-calculus (see https://en.wikipedia.org/wiki/Lambda_calculus)
+- Note that a **constant** `y` or a **constant function** that always return `y` would be written `λx.y`. That is, for ay input we always get y. But there is more to add constant to Lambda-calculus (see https://en.wikipedia.org/wiki/Lambda_calculus)
 
 
-- Procedural (or functional) abstraction is a key feature of essentially all programming languages. Instead of writing the same calculation over and over, we write a procedure or function that performs the calculation generically, in terms of one or more named parameters, and then instantiate this function as needed, providing values for the parameters in each case.
+- **Procedural (or functional) abstraction is a key feature of essentially all programming languages**. Instead of writing the same calculation over and over, we write a procedure or function that performs the calculation generically, in terms of one or more named parameters, and then instantiate this function as needed, providing values for the parameters in each case.
 
 
-- To save writing too many parentheses, we adopt two conventions when writing lambda-terms in linear form.
+- **To save writing too many parentheses, we adopt two conventions when writing lambda-terms in linear form**.
 
-    - Application associates to the left, that is, `s t u` stands for `(s t) u`
+    - **Application associates to the left**, that is, `s t u` stands for `(s t) u`
   
         ![application-1](assets/application-1.png)
   
-    - The bodies of abstractions are taken to extend as far to the right as possible, so that, for example, `λx. λy. x y x` stands for the same tree as `λx. (λy. ((x y) x))`.
+    - **The bodies of abstractions are taken to extend as far to the right as possible**, so that, for example, `λx. λy. x y x` stands for the same tree as `λx. (λy. ((x y) x))`.
 
         ![application-2](assets/application-2.png)
 
-- An occurrence of the variable x is said to be bound when it occurs in the body t of an abstraction λx.t. (More precisely, it is bound by this abstraction. Equivalently, we can say that λx is a binder whose scope is t.) 
+- **An occurrence of the variable** `x` **is said to be bound when it occurs in the body t of an abstraction `λx.t`**. (More precisely, it is bound by this abstraction. Equivalently, we can say that λx is a binder whose scope is t.) 
 
 
-- An occurrence of x is free if it appears in a position where it is not bound by an enclosing abstraction on x. For example, the occurrences of x in x y and λy. x y are free, while the ones in λx.x and λz. λx. λy. x (y z) are bound. In (λx.x) x, the first occurrence of x is bound and the second is free. A term with no free variables is said to be closed; closed terms are also called combinators. The simplest combinator, called the identity function, id = λx.x; does nothing but return its argument.
+- **An occurrence of `x` is free if it appears in a position where it is not bound by an enclosing abstraction on `x`**. For example, the occurrences of `x` in `x y` and `λy. x y` are _free_, while the ones in `λx.x` and `λz. λx. λy. x (y z)` are _bound_. In `(λx.x) x`, the first occurrence of x is _bound_ and the second is _free_. **A term with no free variables is said to be closed**; **closed terms are also called combinators**. The simplest _combinator_, called the **identity function**, `id = λx.x`; does nothing but return its argument.
 
 
 
 ### Operational Semantics
 
-- In its pure form, the lambda-calculus has no built-in constants or primitive operators—no numbers, arithmetic operations, conditionals, records, loops, sequencing, I/O, etc. The sole means by which terms “compute” is the application of functions to arguments (which themselves are functions).
+- **In its pure form, the lambda-calculus has no built-in constants or primitive operators—no numbers, arithmetic operations, conditionals, records, loops, sequencing, I/O, etc.** The sole means by which terms _**“compute”**_ is the **_application of functions to arguments_** (which themselves are functions).
 
-- Each step in the computation consists of rewriting an application whose left-hand component is an abstraction, by substituting the right-hand component for the bound variable in the abstraction’s body. Graphically, we write
+- Each **step** in the **computation** consists of **rewriting** an **application** whose _left-hand_ component is an **abstraction**, by **substituting** the _right-hand_ component for the **bound variable** in the **abstraction’s body**. Graphically, we write
 
   `(λx. t12) t2 ⟶ [x ⟼ t2] t12`
 
@@ -232,10 +232,10 @@ The following are extra materials taken from the book _Types and Programing Lang
 - For example, the term `(λx.x) y` **evaluates to** `y` and the term `(λx. x (λx.x)) (u r)` **evaluates to** `u r (λx.x)`.
 
 
-- A term of the form (λx. t12) t2 is called a redex (“reducible expression”), and the operation of rewriting a redex according to the above rule is called beta-reduction.
+- **A term** of the form **(λx. t12) t2** is called a **redex** (_“reducible expression”_), and **the operation of rewriting a redex according to the above rule is called beta-reduction**.
 
 
-- Several different evaluation strategies for the lambda-calculus have been studied over the years by programming language designers and theorists. Each strategy defines which redex or redexes in a term can fire on the next step of evaluation.
+- Several different **_evaluation strategies_** for the lambda-calculus have been studied over the years by programming language designers and theorists. Each **_strategy_** defines which **redex or redexes** in a term **can fire** on the **next step of evaluation**.
 
   - Under **full beta-reduction**, any **redex** may be reduced at any time. At each step we pick some redex, anywhere inside the term we are evaluating, and reduce it. For example, if we consider the term
   
@@ -277,7 +277,7 @@ The following are extra materials taken from the book _Types and Programing Lang
     > 
     > ⟶
   
-    Under this strategy (and the ones below), the evaluation relation is actually a partial function: each term t evaluates in one step to at most one term t 0
+    Under this strategy (and the ones below), the evaluation relation is actually a partial function: each term `t` evaluates in one step to at most one term `t'`
 
   - The **_call by name_** strategy is yet more restrictive, **allowing no reductions inside abstractions**. Starting from the same term, we would perform the first two reductions as under normal-order, but then stop before the last and regard **λz. id z** as a normal form:
 
