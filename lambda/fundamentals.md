@@ -360,6 +360,9 @@ That is, `f` is a function that, given a value `v` for `x`, yields a function th
 - So on the one hand, typed lambda calculus would make sure that we can always reduce to something meaningful, but on the other hand, from a pure untyped Lambda-Calculus point of view, it is also important to remind ourselves, that variables can be substituted by functions.
 
 
+- Another potentially interesting source https://math.stackexchange.com/questions/3966721/lambda-application-terms-mn-where-m-is-not-a-lambda-abstraction-term
+
+
 
 
 
