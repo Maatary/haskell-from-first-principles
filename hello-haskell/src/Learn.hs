@@ -251,6 +251,7 @@ Figuring out when you need mod takes some experience.
   f $ g $ h x  =  f (g (h x))
 
   Note that (h x) is ordinary function application and in haskell it has the highest precedence i.e. 10
+  https://stackoverflow.com/questions/71031388/precedence-of-function-application
   Hence it is parented first.
 
   The $ function evaluates everything to its right first and can thereby be used to delay function application.
@@ -298,14 +299,14 @@ dollarSign' = (3^) 2 + 2  -- (3^2) + 2
 
   These will work:
 
-  Prelude> 2 - 1    -- because it is unambiguously subtraction
+  λ> 2 - 1    -- because it is unambiguously subtraction
   1
-  Prelude> (-) 2 1  -- because it is unambiguously subtraction
+  λ> (-) 2 1  -- because it is unambiguously subtraction
   1
 
   The following, however, won’t work:
 
-  Prelude> (-2) 1
+  λ> (-2) 1
 
   Enclosing a value inside the parentheses with the '-' operator indicates to GHCi that it’s the argument of a function.
   Because the '-' function represents negation, not subtraction, when it’s applied to a single argument, GHCi does not know what to do with it, and so it returns an error message.
