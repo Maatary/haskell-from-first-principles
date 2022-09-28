@@ -120,6 +120,8 @@
     -- 2 + 2 is not evaluated to 4 until the last possible moment.
     ```
 
+- **Operators** are functions that are **infix** by default. In Haskell, operators must use **symbols** and not **alphanumeric characters**.
+
 
 
 
@@ -132,7 +134,7 @@
 - Head to [Learn.hs](src/Learn.hs) and [LetAndWhere.hs](src/LetAndWhere.hs) for the hands on part of this chapter, which in explore depth the various construct the haskell syntax, and provide solution to the chapter exercises.
 
 - Tips
-  - When writing module in source code and working with `Stack ghci` (or simply) `ghci` to evaluate the code,  use `:reload`, or `:r`, to reload the source files on change.
+  - When writing module in source code and working with `Stack ghci` (or simply) `ghci` to evaluate the code, use `:reload`, or `:r`, to reload the source files on change.
 
 
 

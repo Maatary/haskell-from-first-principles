@@ -1,6 +1,9 @@
 module LetAndWhere where
-import Control.Concurrent (yield)
 
+{-
+  'let' introduces an expression, so it can be used wherever you can have an expression
+  'where' is a declaration and is bound to a surrounding syntactic construct.
+-}
 
 printInc2 :: (Show a, Num a) => a -> IO ()
 printInc2 n =
