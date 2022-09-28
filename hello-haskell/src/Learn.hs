@@ -1,6 +1,8 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Redundant section" #-}
-module Learn where -- () this means export nothing
+
+-- `ModuleName () where` means export nothing, as opposed to `ModuleName where` which means expose everything. 
+module Learn where 
 
 {- Function declaration -}
 half x = x / 2
