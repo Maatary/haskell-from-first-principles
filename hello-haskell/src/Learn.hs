@@ -2,28 +2,50 @@
 {-# HLINT ignore "Redundant section" #-}
 module Learn where -- () this means export nothing
 
-main :: IO ()
-main = putStrLn "hello world"
-  
-sayHello ::  String -> IO ()
-sayHello x = 
-  putStrLn ("Hello, " ++ x ++ "!")
-
-{- First Exploration -}
+{- Function declaration -}
 half x = x / 2
 
 square x =  x * x
 
 triple x = x * 3
 
-myPi x = 3.14 * x^2
 
-aPi x = pi * x ^ 2
+{-
+  Write one function that has one parameter and works for all the following expressions.
+  3.14 * (5 * 5)
+  3.14 * (10 * 10)
+  3.14 * (2 * 2)
+  3.14 * (4 * 4)
 
-{- Infix function i.e. Operator and Prefix Function in Infix Position -}
-functionInInfix = 10 `div` 4
+-}
+squareTimesPi x = 3.14 * x ^ 2
 
-normalFunction  = div 10 4
+-- use pi from prelude instead
+squareTimesPreludePi x = pi * x ^ 2
+
+{-
+  Operator are function with infix semantic.
+  Normal function i.e. which start with alpha-numeric, have prefix semantic.
+
+  Normal function can be used in infix position provided they are surrounded by `` e.g. operand 'fun' operand
+  Operator can be used in prefix position provided they are surrounded by () e.g. (operator) operand operand
+
+  In the example below please note that / and div are not equivalent function, as they operate on different type of Num
+
+  :t (/)
+  (/) :: Fractional a => a -> a -> a
+
+  :t div
+  div :: Integral a => a -> a -> a
+
+-}
+
+normalFunction = div 10 4
+normalFunctionInInfix = 10 `div` 4
+
+operatorfunction = 10 / 4
+operatorfunctionInPrefix = (/) 10 4
+
 
 {- Precedence -}
 
@@ -31,7 +53,14 @@ normalFunction  = div 10 4
 
   perimeter' = perimeter
   
-  Because * is precedence 8 and + 7
+  Because (*) has precedence over (+)
+
+  :i (*)
+  infixl 7 *
+
+  :i (+)
+  infixl 6 +
+
 
 -}
 
