@@ -6,7 +6,7 @@
 
  - A **type** or **datatype** is a _classification_ of values or data. **Types** in Haskell determine what values are members of the type or that inhabit the type. **_Unlike in other languages, datatypes in Haskell by default do not delimit the operations that can be performed on that data._**
 
-- The `::` symbol is read as “has the type.” It is used to define the type signature of named expressions (values, function or any combination of them) i.e. a line of code that defines the types for a value, expression, or function.
+- The `::` symbol is read as _**“has the type.”**_ It is used to define **the type signature** of named expressions (values, function or any combination of them) i.e. a line of code that defines the types for a value, expression, or function.
 
 
 - **Type classes** provide definitions of operations, or functions, that can be shared across sets of types.
