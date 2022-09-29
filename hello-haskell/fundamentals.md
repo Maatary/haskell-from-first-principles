@@ -127,11 +127,19 @@
 
 ## Let and Where
 
-- The difference is that **let** introduces an _expression_, so it can be used wherever you can have an _expression_, but **where** is a _declaration_ and _is bound to a surrounding syntactic construct_.
+- The difference is that **`Let`** introduces an _expression_, so it can be used wherever you can have an _expression_, but **`Where`** is a _declaration_ and _is bound to a surrounding syntactic construct_.
+
+
+-  At the heart of it, **`Let`** and **`Where`**, are how **local bindings** i.e. **local variables** are introduced in haskell code.
+
+
+- The implication of the semantic difference between the two construct goes beyond this chapter.
+  However, a reference is provided below, should the reader feel the need to dive in at this point.
+  https://wiki.haskell.org/Let_vs._Where
 
 ## Hands On
 
-- Head to [Learn.hs](src/Learn.hs) and [LetAndWhere.hs](src/LetAndWhere.hs) for the hands on part of this chapter, which in explore depth the various construct the haskell syntax, and provide solution to the chapter exercises.
+- Head to [Learn.hs](src/Learn.hs) and [LetAndWhere.hs](src/LetAndWhere.hs) for the hands on part of this chapter, which explores in depth the various constructs of the haskell syntax, and provide solutions to the chapter exercises.
 
 - Tips
   - When writing module in source code and working with `Stack ghci` (or simply) `ghci` to evaluate the code, use `:reload`, or `:r`, to reload the source files on change.
