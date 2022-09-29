@@ -8,10 +8,34 @@
 
 - The `::` symbol is read as “has the type.” It is used to define the type signature of named expressions (values, function or any combination of them) i.e. a line of code that defines the types for a value, expression, or function.
 
- -  In Haskell, as per the Prelude, **String** is represented by a _linked list_ of Char values, aka `[Char]`. String is effectively a _type alias_ for `[Char]`. Everything that works on list works on String.
-
 
 - **Type classes** provide definitions of operations, or functions, that can be shared across sets of types.
+
+## String
+
+- In Haskell, as per the Prelude, **String** is represented by a _linked list_ of _Char values_, aka `[Char]`. **String** is effectively a _type alias_ for `[Char]`. Everything that works on list works on String.
+
+
+- Concatenation is the joining together of sequences of values. Often in Haskell, this is meant with respect to the `[]`, or list, datatype, which also applies to `String` (which, as we know, is `[Char]`). The concatenation function in Haskell is `++`, which has type `[a] -> [a] -> [a]`.
+
+    ```haskell
+    λ> :t (++)
+    (++) :: [a] -> [a] -> [a]
+  
+    λ> "hello" ++ " haskell"
+    "hello haskell"
+    ```
+
+
+- There another function concat of which the name can be slightly misleading. The function should actually be called **flatten**, as it is what is does. It **flattens** a **list of list** into a **list**. In that respect it can also be used to concatenate strings, provided that they are placed into a List. 
+
+    ```haskell
+    λ> :t concat
+    concat :: Foldable t => t [a] -> [a]
+    λ> concat  ["hello", " ", "haskell"]
+    "hello haskell"
+    ```
+
 
 
 ## Bindings
@@ -25,7 +49,21 @@
 - When the compiler reads a module, it will see all the top-level declarations, no matter in what order they come.
 
 
-- The **where** and **let** _clauses_ in Haskell introduce _local bindings_ or _declarations_. To _bind_ or _declare_ something means _to give an expression a name_.
+- The **where** and **let** _clauses_ in Haskell introduce **_local bindings_** or **_declarations_**. To **bind** or **declare** something means **to give an expression a name**.
+
+    ```haskell
+    takeDrop :: Int -> Int -> [a] -> [a]
+    takeDrop t d = drop d . take t
+  
+    rvrs :: [Char]
+    rvrs  =
+      let
+        curryIsAwesome = "Curry is awesome"
+        currey = take 5 curryIsAwesome
+        is = takeDrop 8 6 curryIsAwesome
+        awesome = drop 9 curryIsAwesome
+      in concat [awesome, " ",  is, " ", currey ]
+    ```
 
 ## Main and Side-Effects
 
@@ -35,10 +73,10 @@
 - **main** has the type **IO ()**. **IO**, or **I/O**, stands for _input/output_. In Haskell, it is a special type, called **IO**, used when the result of running a program involves effects beyond evaluating a function or expression.
 
 
-- _Printing to the screen is an effect_, so printing the output of a module must be wrapped in this IO type. When you enter functions directly into the REPL, GHCi implicitly understands and implements IO without you having to specify that.
+- _Printing to the screen is an effect_, so printing the output of a module must be wrapped in this **IO type**. When you enter functions directly into the REPL, GHCi implicitly understands and implements IO without you having to specify that.
 
 
-- **The do syntax** is a special syntax that allows for _sequencing actions_. It is most commonly used to sequence the actions that constitute your program, some of which will necessarily perform effects such as printing to the screen (that’s why the obligatory type of main is IO ()). _do notation isn’t strictly necessary_, but since it often makes for more readable code than the alternatives,
+- **The do syntax** is a special syntax that allows for _sequencing actions_. It is most commonly used to sequence the actions that constitute your program, some of which will necessarily perform effects such as printing to the screen (that’s why the obligatory type of main is IO ()). _do notation isn’t strictly necessary_, but it often makes for more readable code than the alternatives.
 
 
 
