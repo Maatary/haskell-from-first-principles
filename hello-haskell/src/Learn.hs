@@ -1,5 +1,12 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+
+-- for hLint Pragma
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-} 
+
 {-# HLINT ignore "Redundant section" #-}
+
+-- ignoring type defaulting pick by GHC warning at this point
+{-# OPTIONS_GHC -Wno-type-defaults #-}
+
 
 
 -- `ModuleName () where` means export nothing, as opposed to `ModuleName where` which means expose everything.
@@ -9,10 +16,13 @@ module Learn where
 
 {- Function declaration -}
 
+half :: Fractional a => a -> a
 half x = x / 2
 
+square :: Num a => a -> a
 square x =  x * x
 
+triple :: Num a => a -> a
 triple x = x * 3
 
 {- Function call
@@ -35,9 +45,11 @@ triple x = x * 3
   3.14 * (4 * 4)
 
 -}
+squareTimesPi :: Fractional a => a -> a
 squareTimesPi x = 3.14 * x ^ 2
 
 -- use pi from prelude instead
+squareTimesPreludePi :: Floating a => a -> a
 squareTimesPreludePi x = pi * x ^ 2
 
 {-
@@ -177,8 +189,8 @@ foo x =
           z = x ^ 2
       in 2 * y * z
 
-x :: Integer
-x = 10
+xDecl :: Integer
+xDecl = 10
     * 5 + 4
 
 
@@ -334,6 +346,7 @@ fourPlus3 = plus3 4 -- Sectioned operator applied
 
 --To refer to an operator on its own i.e. as a function i.e. value
 
+plus :: Integer -> Integer -> Integer
 plus = (+)
 
 substract2 :: Integer -> Integer
