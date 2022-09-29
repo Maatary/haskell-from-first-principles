@@ -1,7 +1,7 @@
 module StringChapter where
 
 
-{- Correct Syntax
+{- Correcting The Syntax
 
    Read the syntax of the following functions, and decide whether it will compile.
    Test them in your REPL, and try to fix the syntax errors where they occur:
@@ -19,10 +19,10 @@ module StringChapter where
 
 {- Operation on List from the stdLib
 
-   λ> :t (:) --cons
+   λ> :t (:) -- cons
    (:) :: a -> [a] -> [a]
 
-   λ> :t (!!) --valueAtIndex
+   λ> :t (!!) -- valueAtIndex
    (!!) :: [a] -> Int -> a
 
    λ> :t head -- first element
@@ -59,11 +59,9 @@ aDrop = drop 3 "hello" -- "lo"
 aTake = take 4 "hello" -- hell
 
 
-{-
-  Readying Syntax
--}
+{- Readying Syntax
 
-{- Fix the expression if needed.
+  Fix the expression if needed.
 
   1. concat [[1, 2, 3], [4, 5, 6]] -- ok
   2. (++) [1, 2, 3] [4, 5, 6]      -- ok
@@ -153,10 +151,8 @@ dropTake t d = drop d . take t
   This doesn’t need to, and shouldn’t, work for reversing the words of any sentence.
   You’re expected only to slice and dice this particular string with take and drop.
 
-  (Page 85).
-
-
 -}
+
 rvrs :: [Char]
 rvrs  =
   let
