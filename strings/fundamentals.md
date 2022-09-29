@@ -26,15 +26,35 @@
     "hello haskell"
     ```
 
+ - In `(++) :: [a] -> [a] -> [a]` Everything after the `::` is about our types, not our values. The `a` inside the list type constructor [] is a type variable. 
 
-- There another function concat of which the name can be slightly misleading. The function should actually be called **flatten**, as it is what is does. It **flattens** a **list of list** into a **list**. In that respect it can also be used to concatenate strings, provided that they are placed into a List. 
+   1. Take an argument of **type** `[a]`. This type is a list of elements of **some type** `a`. **This function does not know what type `a` is**. It doesn’t need to know. In the context of the program, the **type** of `a` will be known and made concrete at some point. 
+   
+   2. Take another argument of **type** `[a]`, a list of elements whose **type** we don’t know. **Because the variables are the same, they must be the same type throughout** `(a == a)`.
+   
+   3. Return a result of **type** `[a]`.
+
+
+- Because **String** is a list containing characters, the operators we use with **strings** can also be used on **lists of other types**, such as lists of numbers. The type `[a]` means that we have a list with elements of a type `a` we do not yet know. If we use the operators to concatenate **lists of numbers**, then the `a` in `[a]` will be **some type of number** (for example, integers). If we are concatenating **lists of characters**, then `a` **represents a Char** because **String** is really type `[Char]`. 
+
+
+- The type variable `a` in `[a]` is polymorphic. Polymorphism is an important feature of Haskell. We will dwelve into it in the upcoming chapters.
+
+
+- For **concatenation**, every list must be a list containing the **same type of values**; we cannot concatenate a list of numbers with a list of characters, for example. **However, since the a is a variable at the type level, the literal values in each list we concatenate need not be the same, only the same type**. That is, `(a == a)`
+
+
+
+- There is another function concat of which the name can be slightly misleading. The function should actually be called **flatten**, as it is what is does. It **flattens** a **list of list** into a **list**. In that respect it can also be used to concatenate strings, provided that they are placed into a List. 
 
     ```haskell
     λ> :t concat
-    concat :: Foldable t => t [a] -> [a]
+    concat :: Foldable t => t [a] -> [a] -- is equivalent to concat :: [[a]] => [a]
     λ> concat  ["hello", " ", "haskell"]
     "hello haskell"
     ```
+
+ - As a side note, it is to be noted that the **square brackets** around **Char** here are the **syntactic sugar** for a list. When we tackle **types** in the  next chapter we will see the full notation for list.
 
 
 
@@ -77,6 +97,15 @@
 
 
 - **The do syntax** is a special syntax that allows for _sequencing actions_. It is most commonly used to sequence the actions that constitute your program, some of which will necessarily perform effects such as printing to the screen (that’s why the obligatory type of main is IO ()). _do notation isn’t strictly necessary_, but it often makes for more readable code than the alternatives.
+
+    ```haskell
+    main :: IO () 
+    main = do 
+      putStrLn "Count to four for me:" 
+      putStr "one, two" 
+      putStr ", three, and" 
+      putStrLn " four!"
+    ``` 
 
 
 

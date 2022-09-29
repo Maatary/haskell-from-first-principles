@@ -2,9 +2,7 @@ module Print3 where
 
   
   
-{- 
-  Note:
-  -----
+{-
   String is a type alias for [char] 
 -}
 
@@ -24,5 +22,30 @@ main = do
     helloWorld = concat [hello, " ", world]
 
 
+
+{- Type Declaration in Local binding
+
+  We can declare the type of the variable in the where and let clause
+
+-}
+
+
+topLevelFunctionWhere :: Integer -> Integer
+topLevelFunctionWhere x = x + woot + topLevelValue
+ where
+      woot :: Integer -- declaring the type in the where clause
+      woot = 10
+
+
+topLevelFunctionLet :: Integer -> Integer
+topLevelFunctionLet x =
+  let
+      woot :: Integer -- declaring the type in the Let clause
+      woot = 10
+
+  in x + woot + topLevelValue
+
+topLevelValue :: Integer
+topLevelValue = 5
 
 
