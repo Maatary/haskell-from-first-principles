@@ -99,7 +99,7 @@
 ## Numeric Datatypes:
 
 
-- We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not _datatypes_. They are _Types Classes_ that (in short) group together the operations common to those groups of _datatypes_. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the _numeric datatypes_. 
+- We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not **datatypes**. They are **Types Classes**, i.e. **Classes of Types**. In short, it means that they group together the **operations common** to those groups of **datatypes**. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the **numeric datatypes**. More details on the semantic and mechanics of Types Classes can be found in its [dedicated chapter](../typeclasses/fundamentals.md).
 
 ### Num, Integral & Fractional Type Classes
 
@@ -124,7 +124,7 @@
    > `div :: Integral a => a -> a -> a`
 
   
-- In the above, `Fractional a =>` can be red as  _**with the constraint of having a Fractional instance for type a we have ...**_ Another way to read it can be, _**with the constraint that type a implements the Fractional Type Class, we have ...**_
+- In the above, `Fractional a =>` can be red as _**"with the constraint of having a Fractional Instance for the type `a` we have ..."**_ or more commonly, _**"with the constraint that type `a` implements the Fractional Type Class, we have ..."**_ 
 
 
 - In Haskell we say that **Num** is a **Super Class** of **Integral** and **Fractional**. Note this has nothing to do with the _object-oriented paradigm_. Here **Super Class** is because the Fractional and Integral **type class constraint**, state that the types that implement them, must already implement the Num type class. **It is a constraint dependency !**
