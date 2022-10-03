@@ -102,6 +102,9 @@
 - We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not **datatypes**. They are **Types Classes**, i.e. **Classes of Types**. In short, it means that they group together the **operations common** to those groups of **datatypes**. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the **numeric datatypes**. 
 
 
+- The reason and implication of all datatype within a same category such as Int, Word and Integer of the Integral category (type class) is mostly related to performance issue. More can be found in page 93 of the chapter and in the following link https://stackoverflow.com/questions/1184296/why-can-haskell-handle-very-large-numbers-easily
+
+
 - **Types Classes** semantics and mechanics are thoroughly studied in their [dedicated chapter](../typeclasses/fundamentals.md). At this point, we could at least clarify that when we said above that groups of **datatypes** are referred as **Integral** or **Fractional**, it means that those DataTypes have respectively **an instance of the Integral Type Class** or **instance of the Fractional Type Class**. An overview of this is provided below.
 
     ```haskell
@@ -174,6 +177,27 @@
    > `2.0 :: Fractional p => p`  
 
 - It is critical to note that when the type is unspecified, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the _**polymorphic value**_ rather than the _concrete datatypes_.
+
+- For the specific of how this inference works for Numeric datatypes please refer to the references below
+
+  - https://www.haskell.org/onlinereport/haskell2010/haskellch6.html#x13-1360006.4.1
+  
+  - https://www.reddit.com/r/haskell/comments/iblo44/is_int_in_haskell_an_algebraic_data_type/
+
+  - https://www.reddit.com/r/haskell/comments/ptzzwg/diehls_comments_on_haskell_numbers_confuse/
+  
+  - https://stackoverflow.com/questions/73935193/clarifying-numeric-literal-definition-in-haskell 
+  
+  - https://kseo.github.io/posts/2017-01-04-type-defaulting-in-haskell.html
+  
+  - https://stackoverflow.com/questions/71196780/what-instance-of-num-is-used-with-literals-e-g-in-print-1
+  
+  - https://stackoverflow.com/questions/64139418/do-i-understand-this-haskell-code-with-fromintegral-correctly
+  
+  - _Note the links above require some more advanced haskell knowledge around type defaulting and parametric polymorphism inference (i.e. to which type a parametric function is instantiated to)_.
+  
+  - For brevity here, we can simply state that the function **FromInteger** and **FromRational** which stand for literals (as in, are the desiguarded result of literals), make numeric literal parametric (in the most generic way possible), such that depending on the context of the call/application in which they are used, the most appropriate type is picked. **Type defaulting** is then used when the parametricity generated make the surrounding expression ambiguous. Integral default to **Integer** and Fractional to **Double**. Note that. It should not be confused with the choice of having **FromInteger** and **FromRational** at start. They just represent the maximal type of the two category, hence covering every possible datatype in those categories.
+
 
 ### Eq & Ord Type Classes
 

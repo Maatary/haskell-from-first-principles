@@ -20,6 +20,7 @@ makeSound :: Pet ->  String
 makeSound Cat      = "Miwow"
 makeSound (Dog _)  = "Woof Woof"
 
+e = fromIntegral 2 + 2.0
 
 
 -- Playing around - inspired from https://wiki.haskell.org/Constructor
