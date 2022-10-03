@@ -99,7 +99,32 @@
 ## Numeric Datatypes:
 
 
-- We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not **datatypes**. They are **Types Classes**, i.e. **Classes of Types**. In short, it means that they group together the **operations common** to those groups of **datatypes**. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the **numeric datatypes**. More details on the semantic and mechanics of Types Classes can be found in its [dedicated chapter](../typeclasses/fundamentals.md).
+- We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not **datatypes**. They are **Types Classes**, i.e. **Classes of Types**. In short, it means that they group together the **operations common** to those groups of **datatypes**. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the **numeric datatypes**. 
+
+
+- **Types Classes** semantics and mechanics are thoroughly studied in their [dedicated chapter](../typeclasses/fundamentals.md). At this point, we could at least clarify that when we said above that groups of **datatypes** are referred as **Integral** or **Fractional**, it means that those DataTypes have respectively **an instance of the Integral Type Class** or **instance of the Fractional Type Class**. An overview of this is provided below.
+
+    ```haskell
+    λ> :i Integer
+    type Integer :: * -- means Integer is a concrete Type (more on this when we get to the Type chapter)
+    data Integer
+      = integer-gmp-1.0.3.0:GHC.Integer.Type.S# ghc-prim-0.6.1:GHC.Prim.Int#
+      | integer-gmp-1.0.3.0:GHC.Integer.Type.Jp# {-# UNPACK #-}integer-gmp-1.0.3.0:GHC.Integer.Type.BigNat
+      | integer-gmp-1.0.3.0:GHC.Integer.Type.Jn# {-# UNPACK #-}integer-gmp-1.0.3.0:GHC.Integer.Type.BigNat
+            -- Defined in ‘integer-gmp-1.0.3.0:GHC.Integer.Type’
+    instance Integral Integer -- Defined in ‘GHC.Real’
+    instance Num Integer      -- Defined in ‘GHC.Num’
+    ```
+  
+    ```haskell
+    λ> :i Double
+    type Double :: * -- means Integer is a concrete Type (more on this when we get to the Type chapter)
+    data Double
+      = ghc-prim-0.6.1:GHC.Types.D# ghc-prim-0.6.1:GHC.Prim.Double#
+            -- Defined in ‘ghc-prim-0.6.1:GHC.Types’
+    instance Num Double -- Defined in ‘GHC.Float’
+    instance Fractional Double -- Defined in ‘GHC.Float’
+    ```
 
 ### Num, Integral & Fractional Type Classes
 
@@ -171,7 +196,7 @@
    > `λ> x == 5`  
    > `True`
    > 
-   > `λ> x /= 5`  
+   > `λ> x /= 5`   -- not equal test
    > `False` 
 
 
@@ -198,10 +223,10 @@
    > `True`
 
 
-- Note that this is leaning on the Ord type class instances for the **List** and **Char** type. You can only compare lists of items where the items themselves also have an instance of Ord. 
+- Note that the comparison of **List of Char above** (i.e. `[Char]`) is **leaning** on the Ord type class instances for the **List** and **Char** type. You can only compare lists of items where the items themselves also have an instance of Ord. This will be thoroughly studied in the [chapter on Type classes](../typeclasses/fundamentals.md)
 
     ```haskell
-    instance (Eq a) => Eq [a] where   
+    instance (Eq a) => Eq [a] where   -- An Instance for `Eq [a]` requires that there is an Instance `Eq a`
         {-# SPECIALISE instance Eq [[Char]] #-}  
         {-# SPECIALISE instance Eq [Char] #-}  
         {-# SPECIALISE instance Eq [Int] #-}   
