@@ -119,10 +119,10 @@
 - We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not **datatypes**. They are **Types Classes**, i.e. **Classes of Types**. In short, it means that they group together the **operations common** to those groups of **datatypes**. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the **numeric datatypes**. 
 
 
-- The reason and implication of all datatype within a same category such as Int, Word and Integer of the Integral category (type class) is mostly related to performance issue. More can be found in **page 93 of this chapter** and in the following link https://stackoverflow.com/questions/1184296/why-can-haskell-handle-very-large-numbers-easily
+- The reason and implication of the existence of each datatype within a same category such as Int, Word and Integer of the Integral category (type class) is mostly related to expressiveness and performance issue. More can be found in **page 93 of this chapter** and in the following link https://stackoverflow.com/questions/1184296/why-can-haskell-handle-very-large-numbers-easily
 
 
-- **Types Classes** semantics and mechanics are thoroughly studied in their [dedicated chapter](../typeclasses/fundamentals.md). At this point, we could at least clarify that when we said above that groups of **datatypes** are referred as **Integral** or **Fractional**, it means that the DataTypes in those groups respectively have **an instance of the Integral Type Class** or **instance of the Fractional Type Class**. An overview of this is provided below.
+- **Types Classes** semantics and mechanics are thoroughly studied in their [dedicated chapter](../typeclasses/fundamentals.md). At this point, we could at least clarify that when we said above that groups of **datatypes** are referred as **Integral** or **Fractional**, it means that the DataTypes in those groups respectively have **an instance of the Integral Type Class** or **instance of the Fractional Type Class**, and all of them have instances of the **Num Type Class**. An overview of this is provided below.
 
     ```haskell
     λ> :i Integer
@@ -169,31 +169,78 @@
    > `div :: Integral a => a -> a -> a`
 
   
-- In the above, `Fractional a =>` can be red as _**"with the constraint of having a Fractional Instance for the type `a` we have ..."**_ or more commonly, _**"with the constraint that type `a` implements the Fractional Type Class, we have ..."**_ 
+- In the above, `Fractional a =>` can be red as _**"with the constraint of having a Fractional Instance for the type `a` we have ..."**_ or more commonly, _**"with the constraint that type `a` implements the Fractional Type Class, we have ..."**_ That is, there must be a declaration of how the operations from that **type class** will work for that **particular type**.
 
 
-- In Haskell we say that **Num** is a **Super Class** of **Integral** and **Fractional**. Note this has nothing to do with the _object-oriented paradigm_. Here **Super Class** is because the Fractional and Integral **type class constraint**, state that the types that implement them, must already implement the Num type class. **It is a constraint dependency !**
+
+
+- In Haskell we say that **Num** is a **Super Class** of **Integral** and **Fractional**. Note this has nothing to do with the _object-oriented paradigm_. Here **Super Class** is because the Fractional and Integral **type class constraint**, state that the types that implement them, must already implement the Num type class. **It is a constraint dependency !** 
 
   > `λ> :i Fractional`  
-  > `type Fractional :: * -> Constraint`    
-  > `class Num a => Fractional a where `   
+  > 
+  > `type Fractional :: * -> Constraint` -- Denote the **Type** of Type class, which will be explained in later chapters  
+  > 
+  > `class Num a => Fractional a where `  -- Begin Type Class definition  
 
   > `λ> :i Integral`  
-  > `type Integral :: * -> Constraint`  
-  > `class Num a => Integral a where`  
+  > 
+  > `type Integral :: * -> Constraint`  -- Denote the **Type** of Type class   which will be explained in later chapters  
+  > 
+  > `class Num a => Integral a where`  -- Begin Type Clas Definition    
 
 - The **literal values** of numbers are _**polymorphic values**_, meaning they can be of different types depending on the context or type annotation.
 
-   > `λ> :t 2`  
-   > `2 :: Num p => p`  
+    > `λ> :t 2`      
+    > 
+    > `2 :: Num p => p`  
+    >  
+    >  The literal 2 is of type `p` where `p` must implement the Num Type Class
   
-   > `λ> :t 2::Double`  
-   > `2::Double :: Double`  
+    > `λ> :t 2::Double`  
+    >   
+    > `2::Double :: Double`  
+    >  
+    >  The literal 2 is of type `Double`
   
-   > `λ> :t 2.0`  
-   > `2.0 :: Fractional p => p`  
+    > `λ> :t 2.0`  
+    > 
+    > `2.0 :: Fractional p => p` 
+    >   
+    > The literal 2 is of type  `p` where `p` must implement the Fractional Type Class
 
-- It is critical to note that when the type is unspecified, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the _**polymorphic value**_ rather than the _concrete datatypes_.
+- It is critical to note that, in general, for any value of any type, when the type is unspecified has in the first and last example above, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the _**polymorphic value**_ rather than the _concrete datatypes_.
+
+
+- For the specific case of numeric literal, the logic of the heuristic is rather straightforward. Any numeric literal value that is without a dot in it, negative or positive is automatically desiguarded into the application of the function `fromInterger`, and any numeric literal that is with a dot in it is desiguarded into the application of the function `fromRational`
+
+    ```haskell
+    λ> :t fromInteger
+    fromInteger :: Num a => Integer -> a
+  
+    λ> :t fromRational 
+    fromRational :: Fractional a => Rational -> a
+    ```
+    Which is what explains the polymorphic type of numeric literal shown above.
+
+    > `42`  
+    >
+    > desiguard into
+    > 
+    > `fromInteger (42::Integer)`  
+    > 
+    > which results into
+    >
+    > 42 :: Num p => p
+
+    as witnessed in GHCI
+
+    ```haskell
+    λ> :t 42
+    42 :: Num p => p
+    ```
+
+ - Note that haskell uses `fromInterger` because **Integer** is the widest type of the integral category of number. Likewise it uses `fromRational` because **Rational** is the widest type of the fractional category of number. 
+
 
 - For the specific of how this inference works for Numeric datatypes please refer to the references below
 
@@ -210,10 +257,7 @@
   - https://stackoverflow.com/questions/71196780/what-instance-of-num-is-used-with-literals-e-g-in-print-1
   
   - https://stackoverflow.com/questions/64139418/do-i-understand-this-haskell-code-with-fromintegral-correctly
-  
-  - _Note the links above require some more advanced haskell knowledge around type defaulting and parametric polymorphism inference (i.e. to which type a parametric function is instantiated to)_.
-  
-  - For brevity here, we can simply state that the function **FromInteger** and **FromRational** which stand for literals (as in, are the desiguarded result of literals), make numeric literal parametric (in the most generic way possible), such that depending on the context of the call/application in which they are used, the most appropriate type is picked. **Type defaulting** is then used when the parametricity generated make the surrounding expression ambiguous. Integral default to **Integer** and Fractional to **Double**. Note that. It should not be confused with the choice of having **FromInteger** and **FromRational** at start. They just represent the maximal type of the two category, hence covering every possible datatype in those categories.
+
 
 
 ### Eq & Ord Type Classes
