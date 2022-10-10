@@ -4,21 +4,37 @@ module LearningBasicDataTypes where
 -- Basic Data Types definition
 data Mood = Blah | Woot deriving (Show)
 
--- Glimpse at Pattern Matching
+
+{- Glimpse at Pattern Matching & working with algebraic datatypes
+
+  Given the type Mood define a above
+
+  1. We want to write a function that change the Mood given a specific Mood (i.e. act like a not),
+     State what's wrong  with the following type signature ? and fix it ?
+     changeMood :: Mood -> Woot  -- Type signature contains type not values Woot is a value (see correction below)
+
+  2. Using pattern matchin we wrote the following function body
+     State what's wrong with it and fix it
+     changeMood Mood = Woot -- Pattern matching is on value not type, Mood is a type (see correction below)
+     changeMood _    = Blah
+
+-}
+
 changeMood :: Mood -> Mood
 changeMood Blah = Woot
 changeMood _    = Blah
 
 
--- Intro
+-- Example of Type alias
 type Name = String
-
 data Pet  = Cat | Dog Name deriving (Show)
 
 -- Pattern Matching of Pet
 makeSound :: Pet ->  String
 makeSound Cat      = "Miwow"
 makeSound (Dog _)  = "Woof Woof"
+
+
 
 e = fromIntegral 2 + 2.0
 
