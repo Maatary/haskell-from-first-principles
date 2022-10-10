@@ -390,7 +390,15 @@
 
 ## Functions Arity & Currying 
 
-- **Arity** is the number of arguments a function accepts. This notion is a little slippery in Haskell since, due to **currying**, all functions are **arity one** (or _“unary”_), and we handle accepting multiple arguments by nesting functions.
+- **Arity** is the number of arguments a function accepts. This notion is a little slippery in Haskell since, due to **currying**, all functions are **arity one** (or _“unary”_), and we handle accepting multiple arguments by nesting functions. In other words, when we write
+
+    > f x y z = x + y + z  
+
+    It is desiguarded by the compiler to
+  
+    > f = \x -> \y -> \z -> x + y + z
+
+    Which is essentially its pure Lambda-Calculus form.
 
 
 ## Polymorphism
