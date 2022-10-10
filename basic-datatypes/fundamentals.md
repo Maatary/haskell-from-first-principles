@@ -2,13 +2,16 @@
 
 ## Types a.k.a. Datatypes
 
-- **Expressions**, when evaluated, reduce to values. _Every value has a type_. **Types** are how we group a set of values together that share something in common.
+- **Types**, also called **datatypes**, provide the means to build programs more quickly and also allow for greater ease of maintenance.
 
 
 - **Types** play an important role in the readability, safety, and maintainability of Haskell code as they allow us to classify and delimit data, **_thus restricting the forms of data our programs can process_**.
 
 
-- **Types** are also called **datatypes**
+- **Expressions**, when evaluated, reduce to values. _Every value has a type_. **Types** are how we group a set of values together that share something in common.
+
+
+ - **Types** can be though of as **set** in mathematics.
 
 
 ## DataType Definition
@@ -25,7 +28,7 @@
 - **When reading or writing type signatures** i.e the **type level** of the code, the **type names** or **type constructors** are what is used.
 
 
-- **Data constructors** _makes up*_ the values that inhabit the type they are defined in. They _make up*_ the values that show up in the code, at the **term level** instead of the **type level**. By **term level**, we mean they _make up*_ the values as they appear in your code or the values that your code evaluates to.
+- **Data constructors** _makes up*_ the values that inhabit the type they are defined in. They _make up*_ the values that show up in the code, at the **term level** instead of the **type level**. By **term level**, we mean they _make up*_ the values as they appear in the code or the values that the code evaluates to.
 
    > **Example of data declaration**
    >
@@ -69,10 +72,18 @@
   
     - In the above, there won't be any value of type Dog or Cat, there is will be value tagged as Dog or Cat.
   
-    - For Instance, in `x = Dog "Goerge" `, `x` has type **Pet**, not **Dog**. However, `"Goerge"` is tagged with **Dog**.
+    - For Instance, in `x = Dog "Goerge" `, `x` has type **Pet**, not **Dog**. However, `"Goerge"` is tagged with **Dog**. `Dog "Goerge"` is the value.
 
 
-- A Deep explanation of the notion of tag can be found here: [clarifying-data-constructor-in-haskell](https://stackoverflow.com/questions/65599830/clarifying-data-constructor-in-haskell?rq=1)
+- A Deep explanation of the notion of tag can be found here:
+
+  - [clarifying data constructor in haskell](https://stackoverflow.com/questions/65599830/clarifying-data-constructor-in-haskell?rq=1)
+  
+  - [Algebraic Data Types - Explanation](https://en.wikipedia.org/wiki/Algebraic_data_type) (The explanation section goes particularly at length to explain the notion of tag)
+  
+  - [what do haskell data-constructors construct](https://stackoverflow.com/questions/51509949/what-do-haskell-data-constructors-construct)
+  
+  - [https://wiki.haskell.org/Algebraic_data_type](https://wiki.haskell.org/Algebraic_data_type)
 
 
 - **Type constructors** in Haskell **are not values** and can only be used in **type signatures**.
@@ -87,12 +98,18 @@
 - **Data declarations** do not always follow precisely the same pattern — there are datatypes that use logical conjunction (and) instead of disjunction, and some type constructors and data constructors may have arguments.
 
 
-
-
 - **A type alias** is a way to refer to a **type constructor** or **type constant** by an alternate name, usually to communicate something more specific or for brevity. _It is not a data declaration_ .
 
+    > `type Name = String`
 
-   > `type Name = String`
+
+- Another example of data type definition
+
+    > `data Bool = False | True`
+    > 
+    > `Bool` is the **Type Constructor** a.k.a the **Type Name**
+    > 
+    > `False` and `True` are the two  **Nullary Data Constructors** and therfore the two possible values i.e. inhabitant of the type **Bool**.
 
 
 
@@ -102,10 +119,10 @@
 - We have the datatypes **Int**, **Word**, **Integer**, which haskell refers to as **Integral**, and the datatypes **Rational**, **Double**, **Fixed**, **Float**, **Scientific** which haskell refer to as **Fractional**.  It is important to note however that **Integral** and **Fractional** are not **datatypes**. They are **Types Classes**, i.e. **Classes of Types**. In short, it means that they group together the **operations common** to those groups of **datatypes**. Both **Fractional** and **Integral** are themselves **Num**. **Num** groups the operation common to all the **numeric datatypes**. 
 
 
-- The reason and implication of all datatype within a same category such as Int, Word and Integer of the Integral category (type class) is mostly related to performance issue. More can be found in page 93 of the chapter and in the following link https://stackoverflow.com/questions/1184296/why-can-haskell-handle-very-large-numbers-easily
+- The reason and implication of all datatype within a same category such as Int, Word and Integer of the Integral category (type class) is mostly related to performance issue. More can be found in **page 93 of this chapter** and in the following link https://stackoverflow.com/questions/1184296/why-can-haskell-handle-very-large-numbers-easily
 
 
-- **Types Classes** semantics and mechanics are thoroughly studied in their [dedicated chapter](../typeclasses/fundamentals.md). At this point, we could at least clarify that when we said above that groups of **datatypes** are referred as **Integral** or **Fractional**, it means that those DataTypes have respectively **an instance of the Integral Type Class** or **instance of the Fractional Type Class**. An overview of this is provided below.
+- **Types Classes** semantics and mechanics are thoroughly studied in their [dedicated chapter](../typeclasses/fundamentals.md). At this point, we could at least clarify that when we said above that groups of **datatypes** are referred as **Integral** or **Fractional**, it means that the DataTypes in those groups respectively have **an instance of the Integral Type Class** or **instance of the Fractional Type Class**. An overview of this is provided below.
 
     ```haskell
     λ> :i Integer
