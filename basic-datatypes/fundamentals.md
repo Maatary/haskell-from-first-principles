@@ -196,22 +196,22 @@
     >  
     >  The literal 2 is of type `p` where `p` must implement the Num Type Class
   
-    > `λ> :t 2::Double`  
+    > `λ> :t 2::Double`
     >   
     > `2::Double :: Double`  
     >  
-    >  The literal 2 is of type `Double`
+    >  The literal 2 is of type `Double`. 
+    > 
+    >  The ::Double force the instantiation of the polymorphic type `Num p => p` to the concrete type Double. It provides for context.
   
     > `λ> :t 2.0`  
     > 
     > `2.0 :: Fractional p => p` 
     >   
     > The literal 2 is of type  `p` where `p` must implement the Fractional Type Class
+  
 
-- It is critical to note that, in general, for any value of any type, when the type is unspecified has in the first and last example above, haskell pick the one that satisfies the context, and the _heuristic_ is to go for _the most generic type description (i.e. concrete type or type class constraint)_. This means the _type class constraint_, can be enough to describe the _**polymorphic value**_ rather than the _concrete datatypes_.
-
-
-- For the specific case of numeric literal, the logic of the heuristic is rather straightforward. Any numeric literal value that is without a dot in it, negative or positive is automatically desiguarded into the application of the function `fromInterger`, and any numeric literal that is with a dot in it is desiguarded into the application of the function `fromRational`
+- Numeric literals are made polymorphic by design in haskell. More specifically, any numeric literal value that is without a dot in it, negative or positive is automatically desiguarded into the application of the function `fromInterger`, and any numeric literal that is with a dot in it is desiguarded into the application of the function `fromRational`
 
     ```haskell
     λ> :t fromInteger
@@ -220,7 +220,7 @@
     λ> :t fromRational 
     fromRational :: Fractional a => Rational -> a
     ```
-    Which is what explains the polymorphic type of numeric literal shown above.
+    Hence
 
     > `42`  
     >
@@ -239,10 +239,14 @@
     42 :: Num p => p
     ```
 
- - Note that haskell uses `fromInterger` because **Integer** is the widest type of the integral category of number. Likewise it uses `fromRational` because **Rational** is the widest type of the fractional category of number. 
+- Numeric literals are defined in this indirect way so that they may be interpreted as values of any appropriate numeric type according to the context.
 
 
-- For the specific of how this inference works for Numeric datatypes please refer to the references below
+- Note that haskell uses `fromInterger` because **Integer** is the widest type of the integral category of number. Likewise, it uses `fromRational` because **Rational** is the widest type of the fractional category of number. 
+
+
+- The detail of what is meant by "so they may be interpreted as values of any appropriate numeric type according to the context" goes beyond the scope of this chapter. We showed a simplified example of it in ``2::Double :: Double`` where the Double at the end provide for a context.  It will be thoroughly explained in later chapters. Meanwhile, some references are provided below that can help start understanding the underlying mechanic including the official specification.
+
 
   - https://www.haskell.org/onlinereport/haskell2010/haskellch6.html#x13-1360006.4.1
   
@@ -257,6 +261,8 @@
   - https://stackoverflow.com/questions/71196780/what-instance-of-num-is-used-with-literals-e-g-in-print-1
   
   - https://stackoverflow.com/questions/64139418/do-i-understand-this-haskell-code-with-fromintegral-correctly
+
+  - https://stackoverflow.com/questions/74028227/why-is-frominteger-allowed-to-return-a-polymorphic-value-but-that-does-not/74028487#74028487
 
 
 
