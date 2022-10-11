@@ -262,7 +262,14 @@
   
   - https://stackoverflow.com/questions/64139418/do-i-understand-this-haskell-code-with-fromintegral-correctly
 
+
+  - https://eli.thegreenplace.net/2018/return-type-polymorphism-in-haskell/
   - https://stackoverflow.com/questions/74028227/why-is-frominteger-allowed-to-return-a-polymorphic-value-but-that-does-not/74028487#74028487
+  - https://chrisdone.com/posts/value-polymorphism/
+  - https://downloads.haskell.org/ghc/latest/docs/users_guide/ghci.html#type-defaulting-in-ghci
+  - https://downloads.haskell.org/~ghc/7.8.4/docs/html/users_guide/interactive-evaluation.html (type-defaulting-in-ghci)
+  - https://andrew.gibiansky.com/blog/haskell/haskell-typeclasses/ (Literals - Some tripping point about literal)
+  - https://diogocastro.com/blog/2018/06/17/typeclasses-in-perspective/#return-type-polymorphism
 
 
 
