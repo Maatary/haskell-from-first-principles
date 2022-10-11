@@ -155,3 +155,24 @@ id' = \x -> x
 
 fst' (a,b) = a
 
+
+
+class Pretty a where
+  pretty :: String -> a
+  
+instance Pretty Integer where
+  pretty x =  read x
+  
+instance Pretty Double where
+  pretty x =  read x 
+  
+instance Pretty Mood where
+  pretty x =  Blah
+  
+--trial1 = pretty "2.0"
+
+--trial0 = read ("2"::String)
+--trial2 = fromInteger(2::Integer)
+
+
+--trial = pretty "2" 
