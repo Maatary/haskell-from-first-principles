@@ -273,7 +273,7 @@
 - References
 
   - https://www.haskell.org/onlinereport/haskell2010/haskellch6.html#x13-1360006.4.1
-  - https://www.reddit.com/r/haskell/comments/iblo44/is_int_in_haskell_an_algebraic_data_type/
+  - ~~https://www.reddit.com/r/haskell/comments/iblo44/is_int_in_haskell_an_algebraic_data_type/~~
   - https://www.reddit.com/r/haskell/comments/ptzzwg/diehls_comments_on_haskell_numbers_confuse/
   - https://stackoverflow.com/questions/73935193/clarifying-numeric-literal-definition-in-haskell
   - https://kseo.github.io/posts/2017-01-04-type-defaulting-in-haskell.html
