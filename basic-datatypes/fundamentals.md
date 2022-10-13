@@ -245,24 +245,40 @@
 - Note that haskell uses `fromInterger` because **Integer** is the widest type of the integral category of number. Likewise, it uses `fromRational` because **Rational** is the widest type of the fractional category of number. 
 
 
-- The detail of what is meant by "so they may be interpreted as values of any appropriate numeric type according to the context" goes beyond the scope of this chapter. We showed a simplified example of it in ``2::Double :: Double`` where the Double at the end provide for a context.  It will be thoroughly explained in later chapters. Meanwhile, some references are provided below that can help start understanding the underlying mechanic including the official specification.
+- The detail of what is meant by "so they may be interpreted as values of any appropriate numeric type according to the context" goes beyond the scope of this chapter. We showed a simplified example of it in ``2::Double :: Double`` where the Double at the end provide for a context.  It will be thoroughly explained in later chapters. Meanwhile, some references are provided below (ref section) that can help start understanding the underlying mechanic including the official specification.
 
+
+- Another important point that will be further explained in the chapter on **Types Classes** and later one respectively, is **Type Defaulting** i.e. **Type Class Instance Default** and **Haskell Type Unification** in general. Those are advanced concept, of which we provide a quick glimpse here, to fully understand what it means that numeric literal are polymorphic value and why.
+
+    ```haskell
+    λ> :t 4
+    4 :: Num p => p
+    λ> :t 2
+    2 :: Num p => p
+  
+    λ> :t (/)
+    (/) :: Fractional a => a -> a -> a
+  
+    λ> 4 / 2
+    2.0
+  
+    
+    ```
+    We can see the result is 2.0 although the result is a whole number and 4 and 2 are also whole number. This is because upon application of `(/)` to `4` and `2`, GHC **first** try to unify the two values **actual types** which is `Num p => p`, with `(/)` **expected type**  which is  `Fractional a => a`. This steps first works because **in haskell we can assign a more specific type to a value of more generic type** ***. This aspect touch upon the concept of **Type Qualification** — which is the case here — or **Type Application**, which are all part of  Haskell **Type Unification**.  
+    Next, in order to evaluate the expression GHC needs to figure out which version of `(/)` to use. That is, it needs to pick the **Type Class Instance** that will provide the actual implementation of `(/)`. However, given that the two values types are polymorphic i.e. `Fractional a => a`, GHC can't figure out which type `a` and therefore type class instance `instance Fractional a`. In that situation, for the **Numeric Type Classes**, GHC pick and applies a default instance. For the Fractional Type Class it is `Fractional Double`. Hence, the Type is set to be `Double`. At that point `4` and `2` get unified to the type Double (trough Type Application this time).  
+    Finaly we get `(/) :: Double -> Double -> Double` applied to `4.0::Double` and `2.0::Double` which leads to `2.0` as a result.
+
+
+
+- References
 
   - https://www.haskell.org/onlinereport/haskell2010/haskellch6.html#x13-1360006.4.1
-  
   - https://www.reddit.com/r/haskell/comments/iblo44/is_int_in_haskell_an_algebraic_data_type/
-
   - https://www.reddit.com/r/haskell/comments/ptzzwg/diehls_comments_on_haskell_numbers_confuse/
-  
-  - https://stackoverflow.com/questions/73935193/clarifying-numeric-literal-definition-in-haskell 
-  
+  - https://stackoverflow.com/questions/73935193/clarifying-numeric-literal-definition-in-haskell
   - https://kseo.github.io/posts/2017-01-04-type-defaulting-in-haskell.html
-  
   - https://stackoverflow.com/questions/71196780/what-instance-of-num-is-used-with-literals-e-g-in-print-1
-  
   - https://stackoverflow.com/questions/64139418/do-i-understand-this-haskell-code-with-fromintegral-correctly
-
-
   - https://eli.thegreenplace.net/2018/return-type-polymorphism-in-haskell/
   - https://stackoverflow.com/questions/74028227/why-is-frominteger-allowed-to-return-a-polymorphic-value-but-that-does-not/74028487#74028487
   - https://chrisdone.com/posts/value-polymorphism/
