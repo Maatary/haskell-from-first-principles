@@ -1,5 +1,8 @@
+{-# LANGUAGE NoMonomorphismRestriction #-}
+{-# LANGUAGE TypeApplications #-}
 module LearningBasicDataTypes where
 
+-- default()
 
 -- Basic Data Types definition
 data Mood = Blah | Woot deriving (Show)
@@ -36,7 +39,7 @@ makeSound (Dog _)  = "Woof Woof"
 
 
 
-e = fromIntegral 2 + 2.0
+--e = fromIntegral 2 + 2.0
 
 
 -- Playing around - inspired from https://wiki.haskell.org/Constructor
@@ -169,10 +172,43 @@ instance Pretty Double where
 instance Pretty Mood where
   pretty x =  Blah
   
+
+--Return type polymorphism  require type annotation to work
+--trial0 = pretty "2"
 --trial1 = pretty "2.0"
 
---trial0 = read ("2"::String)
---trial2 = fromInteger(2::Integer)
+
+f0 :: Read a => a
+f0 = read ("2"::String)
+-- type defaulting so long as monomorphism restriction is in place otherwise the principal type
+--f1 :: Read a => a
+f1 = read "2"
 
 
---trial = pretty "2" 
+--  type defaulting for Numeric Type Class so long as monomorphism restriction is in place otherwise the principal type
+trial2 = fromInteger(2::Integer)
+
+
+
+
+-- going specific from more generic -- possible by type unification -- think contravariance adding constraint instance i.e. TYPE as parameter
+res0 :: Fractional p => p
+res0 = 2 :: (Num p => p)
+
+-- going more generic from more specific -- forbidden
+--res1 :: Num p => p
+--res1 = 2 :: (Fractional p => p)
+
+
+
+--Deep unification explanation needed
+--f2 = show . (read) 
+--f2 x = show (read x)
+
+f3 :: (Read c, Show a) => a -> c
+f3 x = read (show x)
+
+
+
+
+
