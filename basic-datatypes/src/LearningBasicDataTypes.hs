@@ -2,6 +2,7 @@
 {-# LANGUAGE TypeApplications #-}
 module LearningBasicDataTypes where
 
+-- to remove the GHC Type Class instance default
 -- default()
 
 -- Basic Data Types definition
@@ -171,7 +172,7 @@ instance Pretty Double where
   
 instance Pretty Mood where
   pretty x =  Blah
-  
+
 
 --Return type polymorphism  require type annotation to work
 --trial0 = pretty "2"
@@ -202,7 +203,7 @@ res0 = 2 :: (Num p => p)
 
 
 --Deep unification explanation needed
---f2 = show . (read) 
+--f2 = show . (read)
 --f2 x = show (read x)
 
 f3 :: (Read c, Show a) => a -> c
