@@ -20,7 +20,7 @@ Hence, in order to understand how to work with it, we use this readme opportunit
 
 - **Modules form packages**, which may contain **libraries** intended to be used by other packages, **standalone applications**, or **both**. 
 
-- **One special package**, **base**, contains the definitions from the **standard library** (as defined by the [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/) together with **GHC-specific additions**. 
+- **One special package**, **base**, contains the definitions from the **standard library** (as defined by the [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/) together with **GHC-specific additions**). 
 
 - Many professional applications **require working on many packages at the same time**, **so packages are organized into projects to allow application development**.
 
