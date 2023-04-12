@@ -98,7 +98,7 @@ Hence, in order to understand how to work with it, we use this readme opportunit
 
 - A module’s name should begin with an uppercase letter. 
 
-- It is expected to reside in the .hs file with the same name ( _The only exception is the Main module, which is allowed to be placed elsewhere_)
+- It is expected to reside in the .hs file with the same name. The only exception is the Main module, which is allowed to be placed elsewhere _(see [haskell-no-project](https://github.com/Maatary/haskell-no-project) tutorial on compilation for more on this)_.
 
   ```haskell
   module ModuleName (<export list>) where
