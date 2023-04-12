@@ -190,7 +190,6 @@ Hence, in order to understand how to work with it, we use this readme opportunit
 
 - It is important to note that the hierarchy start at the source roots where the module is defined. In the example above, even if Module B comes from an external package, the important thing is that the package is imported in the project and that the directory Y is at the source root of that package.
 
-- 
 
 - The figure below presents the correspondence between the actual position of a module file inside the directory structure, its name as specified in the module declaration, and the proper way to import it. We must adhere to this correspondence if we want GHC to compile a program. (_Not shown in the picture is the source root directory in which Main, A.hs, S, T are situated_)  
 
